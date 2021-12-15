@@ -1,4 +1,7 @@
 import { Guitar } from "../../types/guitar";
-import { DataCards } from "../../types/state"
+import { State } from "../../types/state"
+import { NameSpace } from "../root-reducer";
 
-export const getGuitarCards = (state: DataCards): Guitar[] => state.guitarCards;
+const getGuitarCards = (state: State): Guitar[] => state[NameSpace.Data].guitarCards;
+
+export {getGuitarCards};
