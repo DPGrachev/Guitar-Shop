@@ -2,4 +2,8 @@ const enum AppRoute {
   Main = '/',
 }
 
-export {AppRoute};
+const enum ActionType {
+  SetGuitarCards = 'data-cards/set-guitar-cards',
+}
+
+export {AppRoute, ActionType};
