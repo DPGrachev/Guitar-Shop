@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { useSelector} from 'react-redux';
 import { getGuitarCards } from "../../store/data-cards/selectors";
 import { Guitar } from "../../types/guitar";
@@ -26,6 +26,12 @@ function Search (): JSX.Element {
     navigate(`/guitars/${id}`);
   }
 
+  const onKeyDown = (evt: KeyboardEvent<HTMLLIElement>, id: number) => {
+    if(evt.key === 'Enter'){
+      navigate(`/guitars/${id}`);
+    }
+  }
+
 
   return (
     <div className="form-search">
@@ -39,7 +45,7 @@ function Search (): JSX.Element {
         <label className="visually-hidden" htmlFor="search">Поиск</label>
       </form>
       <ul className={`form-search__select-list ${suitableGuitars.length ? '' : 'hidden'}`} style={{zIndex: 1}}>
-        {suitableGuitars.map((guitar) => <li key={guitar.id} className="form-search__select-item" tabIndex={0} onClick={() => onSuitableGuitarClick(guitar.id)}>{guitar.name}</li>)}
+        {suitableGuitars.map((guitar) => <li key={guitar.id} className="form-search__select-item" tabIndex={0} onClick={() => onSuitableGuitarClick(guitar.id)} onKeyDown={(evt) => onKeyDown(evt, guitar.id)}>{guitar.name}</li>)}
       </ul>
     </div>
   )

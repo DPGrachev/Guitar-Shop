@@ -5,6 +5,20 @@ const enum AppRoute {
 
 const enum ActionType {
   SetGuitarCards = 'data-cards/set-guitar-cards',
+  SetCurrentSortOption = 'catalog-screen/set-current-sort-option',
+  SetCurrentRankingOption = 'catalog-screen/set-current-ranking-option',
 }
 
-export {AppRoute, ActionType};
+enum SortOption {
+  Default = 'Default',
+  Price = 'Price',
+  Popular = 'Popular',
+}
+
+enum RankingOption {
+  Default = 'Default',
+  LowToHigh = 'Low to high',
+  HighToLow = 'High to low',
+}
+
+export {AppRoute, ActionType, SortOption, RankingOption};
