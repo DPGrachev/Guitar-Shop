@@ -1,5 +1,6 @@
 const enum AppRoute {
   Main = '/',
+  GuitarScreen = '/guitars/:id',
 }
 
 const enum ActionType {
