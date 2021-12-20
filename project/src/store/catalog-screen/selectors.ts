@@ -1,9 +1,15 @@
-import { RankingOption, SortOption } from "../../const"
 import { State } from "../../types/state"
 import { NameSpace } from "../root-reducer"
+import { createSelector } from 'reselect';
 
-const getCurrentSortOption = (state: State): SortOption => state[NameSpace.Catalog].currentSortOption;
+const getSortedOptions = (state: State): string => state[NameSpace.Catalog].sortedOptions;
 
-const getCurrentRankingOption = (state: State): RankingOption => state[NameSpace.Catalog].currentRankingOption;
+const getFiltersOptions = (state: State): string => state[NameSpace.Catalog].filtersOptions;
 
-export {getCurrentSortOption, getCurrentRankingOption};
+const getParams = createSelector(
+  getSortedOptions,
+  getFiltersOptions,
+  (sortedOptions, filtersOptions) => filtersOptions + sortedOptions
+)
+
+export { getParams};

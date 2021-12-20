@@ -1,13 +1,15 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { GuitarType, stringsInGuitarType } from "../../const";
+import { setFiltersOptions } from "../../store/actions";
 import { Filters } from "../../types/guitar";
 
 type FilterProps = {
   range: [number, number],
-  setFilters: (filter: Filters) => void,
 }
 
-function Filter ({range, setFilters}: FilterProps) :JSX.Element {
+function Filter ({range}: FilterProps) :JSX.Element {
+  const dispatch = useDispatch();
   const [minPrice, maxPrice] = range;
   const initialFilters: Filters = {
     priceRange: range,
@@ -70,12 +72,9 @@ function Filter ({range, setFilters}: FilterProps) :JSX.Element {
   }
 
   useEffect(() => {
-    setFilters({
-      priceRange: priceRange,
-      guitarType: guitarTypeFilter,
-      stringCount: stringsCountFilter,
-    })
-  }, [setFilters, guitarTypeFilter, stringsCountFilter, priceRange])
+    dispatch(setFiltersOptions(`${guitarTypeFilter.map((type) => `&type=${type}`).join('')}&price_gte=${priceRange[0]}&price_lte=${priceRange[1]}${stringsCountFilter.map(value => `&stringCount=${value}`).join('')}`));
+
+  }, [dispatch, guitarTypeFilter, priceRange, stringsCountFilter])
 
 
   return (

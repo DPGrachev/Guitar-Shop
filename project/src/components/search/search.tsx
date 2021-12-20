@@ -1,24 +1,17 @@
 import { ChangeEvent, KeyboardEvent, useState } from "react";
-import { useSelector} from 'react-redux';
-import { getGuitarCards } from "../../store/data-cards/selectors";
-import { Guitar } from "../../types/guitar";
+import { useDispatch, useSelector} from 'react-redux';
+import { getSimilarGuitarCards } from "../../store/data-cards/selectors";
 import {useNavigate} from 'react-router-dom'
+import { fetchSimilarGuitarCardsAction } from "../../store/api-actions";
 
 function Search (): JSX.Element {
-  const guitars = useSelector(getGuitarCards);
+  const similarGuitars = useSelector(getSimilarGuitarCards);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchText, setSearchText] = useState('');
 
-  const searchSuitableGuitar = (guitars: Guitar[]) => {
-    if(searchText && searchText !== ' '){
-      return guitars.filter((guitar) => guitar.name.toLowerCase().includes(searchText.toLowerCase()));
-    }
-    return [];
-  }
-
-  const suitableGuitars = searchSuitableGuitar(guitars)
-
   const onTextChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    dispatch(fetchSimilarGuitarCardsAction(evt.target.value))
     setSearchText(evt.target.value);
   }
 
@@ -32,7 +25,6 @@ function Search (): JSX.Element {
     }
   }
 
-
   return (
     <div className="form-search">
       <form className="form-search__form">
@@ -44,8 +36,8 @@ function Search (): JSX.Element {
         <input className="form-search__input" id="search" type="text" autoComplete="off" placeholder="что вы ищите?" onChange={onTextChange}/>
         <label className="visually-hidden" htmlFor="search">Поиск</label>
       </form>
-      <ul className={`form-search__select-list ${suitableGuitars.length ? '' : 'hidden'}`} style={{zIndex: 1}}>
-        {suitableGuitars.map((guitar) => <li key={guitar.id} className="form-search__select-item" tabIndex={0} onClick={() => onSuitableGuitarClick(guitar.id)} onKeyDown={(evt) => onKeyDown(evt, guitar.id)}>{guitar.name}</li>)}
+      <ul className={`form-search__select-list ${similarGuitars.length && searchText.length ? '' : 'hidden'}`} style={{zIndex: 1}}>
+        {similarGuitars.map((guitar) => <li key={guitar.id} className="form-search__select-item" tabIndex={0} onClick={() => onSuitableGuitarClick(guitar.id)} onKeyDown={(evt) => onKeyDown(evt, guitar.id)}>{guitar.name}</li>)}
       </ul>
     </div>
   )

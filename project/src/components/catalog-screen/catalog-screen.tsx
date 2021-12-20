@@ -2,40 +2,28 @@ import CardsCatalog from "../cards-catalog/cards-catalog";
 import Filter from "../filter/filter";
 import Pagination from "../pagination/pagination";
 import Sort from "../sort/sort";
-import { useState } from "react";
-import { Filters } from "../../types/guitar";
-import { useSelector} from 'react-redux';
-import { getSortedGuitarCards } from "../../store/data-cards/selectors";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { getGuitarCards } from "../../store/data-cards/selectors";
+import { fetchGuitarCardsAction } from "../../store/api-actions";
+import { getParams } from "../../store/catalog-screen/selectors";
 
 function CatalogScreen ():JSX.Element {
-  let guitars = useSelector(getSortedGuitarCards);
+  const dispatch = useDispatch();
+  const params = useSelector(getParams);
 
-  const initialFilters: Filters = {
-    priceRange: [0,0],
-    guitarType: [],
-    stringCount: [],
-  };
-
-  const [filters, setFilters] = useState(initialFilters);
+  useEffect(() => {
+    dispatch(fetchGuitarCardsAction(params));
+  }, [dispatch, params])
+  let guitars = useSelector(getGuitarCards);
 
   if(!guitars.length){
     return <h1>Загрузка...</h1>
   }
 
-  if(filters.guitarType.length){
-    guitars = guitars.filter((guitar) => filters.guitarType.includes(guitar.type));
-  }
-  if(filters.stringCount.length){
-    guitars = guitars.filter((guitar) => filters.stringCount.includes(guitar.stringCount));
-  }
-
   const minPrice = guitars.slice().sort((a,b) => a.price - b.price)[0].price;
   const maxPrice = guitars.slice().sort((a,b) => b.price - a.price)[0].price;
-
-  if(filters.priceRange[1]){
-    guitars = guitars.filter((guitar) => (guitar.price >= filters.priceRange[0] && guitar.price <= filters.priceRange[1]));
-  }
-
+  
   return (
     <div className="container">
       <h1 className="page-content__title title title--bigger">Каталог гитар</h1>
@@ -46,7 +34,7 @@ function CatalogScreen ():JSX.Element {
         </li>
       </ul>
       <div className="catalog">
-        <Filter range={[minPrice,maxPrice]} setFilters={setFilters}/>
+        <Filter range={[minPrice,maxPrice]}/>
         <Sort />
         <CardsCatalog guitars={guitars}/>
         <Pagination />

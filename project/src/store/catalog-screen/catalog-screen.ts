@@ -1,21 +1,19 @@
 import { createReducer } from "@reduxjs/toolkit"
-
-import { setCurrentRankingOption, setCurrentSortOption } from "../actions"
+import { setFiltersOptions, setSortedOptions } from "../actions"
 import { CatalogScreen } from "../../types/state"
-import { SortOption, RankingOption } from "../../const"
 
 const initialState: CatalogScreen = {
-  currentSortOption: SortOption.Default,
-  currentRankingOption: RankingOption.Default,
+  sortedOptions: '',
+  filtersOptions: '',
 }
 
 const catalogScreen = createReducer(initialState,(builder) => {
   builder
-    .addCase(setCurrentSortOption, (state, action) => {
-      state.currentSortOption = action.payload.currentSortOption;
+    .addCase(setSortedOptions, (state, action) => {
+      state.sortedOptions = action.payload.sortedOptions;
     })
-    .addCase(setCurrentRankingOption, (state, action) => {
-      state.currentRankingOption = action.payload.currentRankingOption;
+    .addCase(setFiltersOptions, (state, action) => {
+      state.filtersOptions = action.payload.filtersOptions;
     })
 })
 

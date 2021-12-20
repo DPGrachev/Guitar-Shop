@@ -5,20 +5,21 @@ const enum AppRoute {
 
 const enum ActionType {
   SetGuitarCards = 'data-cards/set-guitar-cards',
-  SetCurrentSortOption = 'catalog-screen/set-current-sort-option',
-  SetCurrentRankingOption = 'catalog-screen/set-current-ranking-option',
+  SetSimilarGuitarCards = 'data-cards/set-similar-guitar-cards',
+  SetSortedOptions = 'catalog-screen/set-sorted-options',
+  SetFiltesOptions = 'catalog-screen/set-filters-options',
 }
 
 enum SortOption {
   Default = 'Default',
-  Price = 'Price',
-  Rating = 'Rating',
+  Price = 'price',
+  Rating = 'rating',
 }
 
 enum RankingOption {
   Default = 'Default',
-  LowToHigh = 'Low to high',
-  HighToLow = 'High to low',
+  LowToHigh = 'asc',
+  HighToLow = 'desc',
 }
 
 enum GuitarType {

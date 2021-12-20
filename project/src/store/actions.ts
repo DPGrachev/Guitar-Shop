@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { ActionType, RankingOption, SortOption } from "../const";
+import { ActionType } from "../const";
 import { Guitar } from "../types/guitar";
 
 const setGuitarCards = createAction(
@@ -11,22 +11,31 @@ const setGuitarCards = createAction(
   }),
 );
 
-const setCurrentSortOption = createAction(
-  ActionType.SetCurrentSortOption,
-  (sortOption: SortOption) => ({
+const setSimilarGuitarCards = createAction(
+  ActionType.SetSimilarGuitarCards,
+  (cards: Guitar[]) => ({
     payload: {
-      currentSortOption: sortOption,
+      guitarCards: cards,
     },
   }),
 );
 
-const setCurrentRankingOption = createAction(
-  ActionType.SetCurrentRankingOption,
-  (rankingOption: RankingOption) => ({
+const setSortedOptions = createAction(
+  ActionType.SetSortedOptions,
+  (params: string) => ({
     payload: {
-      currentRankingOption: rankingOption,
-    },
-  }),
-);
+      sortedOptions: params,
+    }
+  })
+)
 
-export {setGuitarCards, setCurrentSortOption, setCurrentRankingOption};
+const setFiltersOptions = createAction(
+  ActionType.SetFiltesOptions,
+  (params: string) => ({
+    payload: {
+      filtersOptions: params,
+    }
+  })
+)
+
+export {setGuitarCards, setSortedOptions, setFiltersOptions, setSimilarGuitarCards};

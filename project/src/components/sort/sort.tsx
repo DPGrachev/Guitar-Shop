@@ -1,26 +1,32 @@
-import {MouseEvent} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import {MouseEvent, useState} from 'react';
+import { useDispatch } from 'react-redux';
 import { RankingOption, SortOption } from '../../const';
-import { setCurrentRankingOption, setCurrentSortOption } from '../../store/actions';
-import { getCurrentRankingOption, getCurrentSortOption } from '../../store/catalog-screen/selectors';
+import { setSortedOptions } from '../../store/actions';
 
 function Sort() :JSX.Element {
   const dispatch = useDispatch();
-  const currentSortOption = useSelector(getCurrentSortOption);
-  const currentRankingOption = useSelector(getCurrentRankingOption);
+
+  const [currentSortOption, setCurrentSortOption] = useState(SortOption.Default);
+  const [currentRankingOption, setCurrentRankingOption] = useState(RankingOption.Default);
 
   const onSortOptionClick = (evt: MouseEvent<HTMLButtonElement>) => {
+    let rankingOption = currentRankingOption;
     if(currentRankingOption === RankingOption.Default){
-      dispatch(setCurrentRankingOption(RankingOption.LowToHigh));
+      setCurrentRankingOption(RankingOption.LowToHigh);
+      rankingOption = RankingOption.LowToHigh;
     }
-    dispatch(setCurrentSortOption(evt.currentTarget.dataset.name as SortOption));
+    setCurrentSortOption(evt.currentTarget.dataset.name as SortOption);
+    dispatch(setSortedOptions(`&_sort=${evt.currentTarget.dataset.name}&_order=${rankingOption}`));
   }
 
   const onRankingOptionClick = (evt: MouseEvent<HTMLButtonElement>) => {
+    let sortOption = currentSortOption;
     if(currentSortOption === SortOption.Default){
-      dispatch(setCurrentSortOption(SortOption.Price));
+      setCurrentSortOption(SortOption.Price);
+      sortOption = SortOption.Price;
     }
-    dispatch(setCurrentRankingOption(evt.currentTarget.dataset.name as RankingOption));
+    setCurrentRankingOption(evt.currentTarget.dataset.name as RankingOption);
+    dispatch(setSortedOptions(`&_sort=${sortOption}&_order=${evt.currentTarget.dataset.name}`));
   }
 
   return (
