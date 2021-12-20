@@ -1,8 +1,10 @@
+import { GuitarType } from "../const";
+
 type Guitar = {
   id: number,
   name: string,
   vendorCode: string,
-  type: string,
+  type: GuitarType,
   description: string,
   previewImg: string,
   stringCount: number,
@@ -10,4 +12,10 @@ type Guitar = {
   price: number,
 }
 
-export type {Guitar};
+type Filters = {
+  priceRange: [number, number],
+  guitarType: GuitarType[],
+  stringCount: number[],
+}
+
+export type {Guitar, Filters};

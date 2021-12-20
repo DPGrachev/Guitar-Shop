@@ -22,7 +22,7 @@ const getSortedGuitarCards = createSelector(
         }
         return guitars.slice().sort((a,b) => a.price - b.price);
       }
-      case SortOption.Popular: {
+      case SortOption.Rating: {
         if(currentRankingOption === RankingOption.HighToLow){
           return guitars.slice().sort((a,b) => b.rating - a.rating);
         }

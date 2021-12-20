@@ -1,9 +1,11 @@
 import GuitarCard from "../guitar-card/guitar-card";
-import { useSelector} from 'react-redux';
-import { getSortedGuitarCards } from "../../store/data-cards/selectors";
+import { Guitar } from "../../types/guitar";
 
-function CardsCatalog () :JSX.Element {
-  const guitars = useSelector(getSortedGuitarCards).slice(0,9);
+type CardsCatalogProps = {
+  guitars: Guitar[],
+}
+
+function CardsCatalog ({guitars}: CardsCatalogProps) :JSX.Element {
 
   return (
     <div className="cards catalog__cards">

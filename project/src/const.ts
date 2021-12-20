@@ -12,7 +12,7 @@ const enum ActionType {
 enum SortOption {
   Default = 'Default',
   Price = 'Price',
-  Popular = 'Popular',
+  Rating = 'Rating',
 }
 
 enum RankingOption {
@@ -21,4 +21,16 @@ enum RankingOption {
   HighToLow = 'High to low',
 }
 
-export {AppRoute, ActionType, SortOption, RankingOption};
+enum GuitarType {
+  Electric = 'electric',
+  Ukulele = 'ukulele',
+  Acoustic = 'acoustic',
+}
+
+const stringsInGuitarType = {
+  [GuitarType.Electric] : [4,6,7],
+  [GuitarType.Ukulele] : [4],
+  [GuitarType.Acoustic] : [6,7,12],
+}
+
+export {AppRoute, ActionType, SortOption, RankingOption, GuitarType, stringsInGuitarType};

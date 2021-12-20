@@ -28,7 +28,7 @@ function Sort() :JSX.Element {
       <h2 className="catalog-sort__title">Сортировать:</h2>
       <div className="catalog-sort__type">
         <button className={`catalog-sort__type-button ${currentSortOption === SortOption.Price ? 'catalog-sort__type-button--active' : ''}`} aria-label="по цене" tabIndex={-1} data-name={SortOption.Price} onClick={onSortOptionClick}>по цене</button>
-        <button className={`catalog-sort__type-button ${currentSortOption === SortOption.Popular ? 'catalog-sort__type-button--active' : ''}`} aria-label="по популярности" data-name={SortOption.Popular} onClick={onSortOptionClick}>по популярности</button>
+        <button className={`catalog-sort__type-button ${currentSortOption === SortOption.Rating ? 'catalog-sort__type-button--active' : ''}`} aria-label="по популярности" data-name={SortOption.Rating} onClick={onSortOptionClick}>по популярности</button>
       </div>
       <div className="catalog-sort__order">
         <button className={`catalog-sort__order-button catalog-sort__order-button--up ${currentRankingOption === RankingOption.LowToHigh ? 'catalog-sort__order-button--active' : ''}`} aria-label="По возрастанию" tabIndex={-1} data-name={RankingOption.LowToHigh} onClick={onRankingOptionClick}></button>
