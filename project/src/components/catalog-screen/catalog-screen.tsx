@@ -11,18 +11,13 @@ import { getParams } from "../../store/catalog-screen/selectors";
 function CatalogScreen ():JSX.Element {
   const dispatch = useDispatch();
   const params = useSelector(getParams);
+  const guitars = useSelector(getGuitarCards);
 
   useEffect(() => {
-    dispatch(fetchGuitarCardsAction(params));
+    if(params){
+      dispatch(fetchGuitarCardsAction(params));
+    }
   }, [dispatch, params])
-  let guitars = useSelector(getGuitarCards);
-
-  if(!guitars.length){
-    return <h1>Загрузка...</h1>
-  }
-
-  const minPrice = guitars.slice().sort((a,b) => a.price - b.price)[0].price;
-  const maxPrice = guitars.slice().sort((a,b) => b.price - a.price)[0].price;
   
   return (
     <div className="container">
@@ -34,9 +29,9 @@ function CatalogScreen ():JSX.Element {
         </li>
       </ul>
       <div className="catalog">
-        <Filter range={[minPrice,maxPrice]}/>
+        <Filter />
         <Sort />
-        <CardsCatalog guitars={guitars}/>
+        {guitars.length ? <CardsCatalog guitars={guitars}/> : <h1>Загрузка...</h1>}
         <Pagination />
       </div>
     </div>

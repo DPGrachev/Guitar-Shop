@@ -6,10 +6,13 @@ const getSortedOptions = (state: State): string => state[NameSpace.Catalog].sort
 
 const getFiltersOptions = (state: State): string => state[NameSpace.Catalog].filtersOptions;
 
+const getCurrentPageOptions = (state: State): string => state[NameSpace.Catalog].currentPageOptions;
+
 const getParams = createSelector(
   getSortedOptions,
   getFiltersOptions,
-  (sortedOptions, filtersOptions) => filtersOptions + sortedOptions
+  getCurrentPageOptions,
+  (sortedOptions, filtersOptions, currentPageOptions) => filtersOptions + sortedOptions + currentPageOptions
 )
 
 export { getParams};

@@ -5,6 +5,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './store/root-reducer';
 import { Provider } from 'react-redux';
 import { createAPI } from './services/api';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const api = createAPI();
 
@@ -21,6 +23,7 @@ const store = configureStore({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ToastContainer />
       <App />
     </Provider>
   </React.StrictMode>,

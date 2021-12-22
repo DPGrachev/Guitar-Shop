@@ -11,6 +11,33 @@ const setGuitarCards = createAction(
   }),
 );
 
+const setCardsTotalCount = createAction(
+  ActionType.SetCardsTotalCount,
+  (totalCount: number) => ({
+    payload: {
+      cardsTotalCount: totalCount,
+    },
+  }),
+);
+
+const setMaxPrice = createAction(
+  ActionType.SetMaxPrice,
+  (price: number) => ({
+    payload: {
+      maxPrice: price,
+    },
+  }),
+);
+
+const setMinPrice = createAction(
+  ActionType.SetMinPrice,
+  (price: number) => ({
+    payload: {
+      minPrice: price,
+    },
+  }),
+);
+
 const setSimilarGuitarCards = createAction(
   ActionType.SetSimilarGuitarCards,
   (cards: Guitar[]) => ({
@@ -38,4 +65,13 @@ const setFiltersOptions = createAction(
   })
 )
 
-export {setGuitarCards, setSortedOptions, setFiltersOptions, setSimilarGuitarCards};
+const setCurrentPageOptions = createAction(
+  ActionType.SetCurrentPageOptions,
+  (params: string) => ({
+    payload: {
+      currentPageOptions: params,
+    }
+  })
+)
+
+export {setGuitarCards, setMaxPrice, setMinPrice, setCardsTotalCount, setSortedOptions, setFiltersOptions, setSimilarGuitarCards, setCurrentPageOptions};

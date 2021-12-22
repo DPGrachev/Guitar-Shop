@@ -1,18 +1,20 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { GuitarType, stringsInGuitarType } from "../../const";
 import { setFiltersOptions } from "../../store/actions";
+import { fetchMaxPriceAction, fetchMinPriceAction } from "../../store/api-actions";
+import { getMaxPrice, getMinPrice } from "../../store/data-cards/selectors";
 import { Filters } from "../../types/guitar";
 
-type FilterProps = {
-  range: [number, number],
-}
-
-function Filter ({range}: FilterProps) :JSX.Element {
+function Filter () :JSX.Element {
   const dispatch = useDispatch();
-  const [minPrice, maxPrice] = range;
+  const maxPrice = useSelector(getMaxPrice);
+  const minPrice = useSelector(getMinPrice);
+  const maxPriceField = document.getElementById('priceMax') as HTMLInputElement;
+  const minPriceField = document.getElementById('priceMin') as HTMLInputElement;
+
   const initialFilters: Filters = {
-    priceRange: range,
+    priceRange: [0,0],
     guitarType: [],
     stringCount: [],
   };
@@ -21,7 +23,38 @@ function Filter ({range}: FilterProps) :JSX.Element {
   const [stringsCountFilter, setStringsCountFilter] = useState(initialFilters.stringCount);
   const [priceRange , setPriceRange] = useState(initialFilters.priceRange);
 
+  const guitarTypeOptions = useCallback(() => guitarTypeFilter.map((type) => `&type=${type}`).join(''), [guitarTypeFilter]);
+  const stringsCountOptions = useCallback(() => stringsCountFilter.map(value => `&stringCount=${value}`).join(''), [stringsCountFilter]);
+  const priceRangeOptions = useCallback(() => {
+    if(priceRange[0] && priceRange[1]){
+     return `&price_gte=${priceRange[0]}&price_lte=${priceRange[1]}`
+    }
+
+    return '';
+  }, [priceRange])
+  const resetPriceRangeFields = () => {
+    minPriceField.value = '';
+    maxPriceField.value = '';
+  }
+
+  useEffect(() => {
+    dispatch(fetchMaxPriceAction(guitarTypeOptions()+stringsCountOptions()));
+    dispatch(fetchMinPriceAction(guitarTypeOptions()+stringsCountOptions()));
+  },[dispatch, guitarTypeOptions, stringsCountOptions])
+
+  useEffect(() => {
+    setPriceRange([minPrice,maxPrice])
+  },[minPrice,maxPrice])
+
+  useEffect(() => {
+    if(priceRangeOptions()){
+      dispatch(setFiltersOptions(`${guitarTypeOptions()}${priceRangeOptions()}${stringsCountOptions()}`));
+    }
+
+  }, [dispatch, guitarTypeOptions, priceRangeOptions, stringsCountOptions])
+
   const onGuitarTypeChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    resetPriceRangeFields();
     const type = evt.currentTarget.name as GuitarType;
     if(guitarTypeFilter.includes(type)){
       setGuitarTypeFilter(guitarTypeFilter.filter((guitarType) => guitarType !== type));
@@ -31,6 +64,7 @@ function Filter ({range}: FilterProps) :JSX.Element {
   }
 
   const onStringsCountChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    resetPriceRangeFields();
     const stringsCount = parseFloat(evt.currentTarget.name) ;
     if(stringsCountFilter.includes(stringsCount)){
       setStringsCountFilter(stringsCountFilter.filter((count) => count !== stringsCount));
@@ -70,11 +104,6 @@ function Filter ({range}: FilterProps) :JSX.Element {
     }
     return false;
   }
-
-  useEffect(() => {
-    dispatch(setFiltersOptions(`${guitarTypeFilter.map((type) => `&type=${type}`).join('')}&price_gte=${priceRange[0]}&price_lte=${priceRange[1]}${stringsCountFilter.map(value => `&stringCount=${value}`).join('')}`));
-
-  }, [dispatch, guitarTypeFilter, priceRange, stringsCountFilter])
 
 
   return (
