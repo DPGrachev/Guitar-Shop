@@ -10,7 +10,6 @@ function App(): JSX.Element {
   return (
     <Router>
       <Routes>
-        {/* <Route path={AppRoute.Main} element={<GeneralWrapper/>}> */}
         <Route path={AppRoute.Main} element={<GeneralWrapper/>}>
           <Route index element={<MainScreen/>}/>
           <Route path={AppRoute.Catalog} element={<CatalogScreen />}/>

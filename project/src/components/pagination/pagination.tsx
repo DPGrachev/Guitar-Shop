@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-// import { AppRoute } from "../../const";
 import { setCurrentPageOptions } from "../../store/actions";
 import { getCardsTotalCount } from "../../store/data-cards/selectors";
 
@@ -10,25 +9,13 @@ function Pagination () :JSX.Element {
   const initialPagaNumbers = [1,2,3];
   const params = useParams();
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const cardsTotalCount = useSelector(getCardsTotalCount);
   const currentPageNumber = Number(params.number);
   const [pageNumbers, setPageNumbers] = useState(initialPagaNumbers);
 
-  // const isValidPageNumber = (pageNumber: number) => {
-  //   return (cardsTotalCount && cardsTotalCount > (pageNumber-1) * CARDS_COUNT_IN_PAGE);
-  // }
-
-  // console.log(cardsTotalCount && cardsTotalCount > (currentPageNumber-1) * CARDS_COUNT_IN_PAGE)
-
-
   useEffect(()=> {
     dispatch(setCurrentPageOptions(`&_start=${(currentPageNumber - 1) * CARDS_COUNT_IN_PAGE}&_limit=${CARDS_COUNT_IN_PAGE}`))
   },[dispatch, currentPageNumber])
-
-  // if(cardsTotalCount && !(cardsTotalCount > (currentPageNumber-1) * CARDS_COUNT_IN_PAGE)){
-  //   navigate(AppRoute.NotFoundScreen);
-  // }
   
   const onNextButtonClick = () => {
     setPageNumbers(pageNumbers.map((number) => number += pageNumbers.length))

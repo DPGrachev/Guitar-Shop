@@ -45,5 +45,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@jedmao/redux-mock-store": "^3.0.5",
+    "axios-mock-adapter": "^1.20.0",
+    "history": "^5.2.0"
   }
 }
