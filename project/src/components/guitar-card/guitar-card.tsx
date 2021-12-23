@@ -16,7 +16,7 @@ function GuitarCard ({guitar} : GuitarCardProps) :JSX.Element {
         <p className="product-card__price"><span className="visually-hidden">Цена:</span>{`${guitar.price} ₽`}
         </p>
       </div>
-      <div className="product-card__buttons"><a className="button button--mini" href="#">Подробнее</a><a className="button button--red button--mini button--add-to-cart" href="#">Купить</a>
+      <div className="product-card__buttons"><a className="button button--mini" href="/">Подробнее</a><a className="button button--red button--mini button--add-to-cart" href="/">Купить</a>
       </div>
     </div>
   )
