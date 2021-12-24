@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 const fetchGuitarCardsAction = (params: string) : ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     try{
-      await api.get<Guitar[]>(`/guitars?${params}`)
+      await api.get<Guitar[]>(`/guitars?_embed=comments${params}`)
         .then((response) => {
           dispatch(setCardsTotalCount(Number(response.headers['x-total-count'])));
           dispatch(setGuitarCards(response.data));

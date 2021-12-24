@@ -20,11 +20,11 @@ describe('Async actions', () => {
       ThunkDispatch<State, typeof api, Action>
     >(middlewares);
 
-    it('should dispatch setCardsTotalCount and setGuitarCards when GET /guitars?:params', async () => {
+    it('should dispatch setCardsTotalCount and setGuitarCards when GET /guitars?_embed=comments:params', async () => {
       const store = mockStore();
       const fakeParams = '_start=10&_end=20'
       mockAPI
-        .onGet(`/guitars?${fakeParams}`)
+        .onGet(`/guitars?_embed=comments${fakeParams}`)
         .reply(200, mockGuitars, {'x-total-count' : mockGuitars.length});
   
       expect(store.getActions()).toEqual([]);

@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getGuitarCards } from "../../store/data-cards/selectors";
 import { fetchGuitarCardsAction } from "../../store/api-actions";
 import { getParams } from "../../store/catalog-screen/selectors";
+import { Link } from "react-router-dom";
+import { AppRoute } from "../../const";
 
 function CatalogScreen ():JSX.Element {
   const dispatch = useDispatch();
@@ -23,9 +25,9 @@ function CatalogScreen ():JSX.Element {
     <div className="container">
       <h1 className="page-content__title title title--bigger">Каталог гитар</h1>
       <ul className="breadcrumbs page-content__breadcrumbs">
-        <li className="breadcrumbs__item"><a className="link" href="./main.html">Главная</a>
+        <li className="breadcrumbs__item"><Link className="link" to={AppRoute.Main}>Главная</Link>
         </li>
-        <li className="breadcrumbs__item"><a className="link" href='/catalog/page_1'>Каталог</a>
+        <li className="breadcrumbs__item"><Link className="link" to={AppRoute.FirstCatalogPage}>Каталог</Link>
         </li>
       </ul>
       <div className="catalog">

@@ -6,12 +6,12 @@ import { getCardsTotalCount } from "../../store/data-cards/selectors";
 
 function Pagination () :JSX.Element {
   const CARDS_COUNT_IN_PAGE = 9;
-  const initialPagaNumbers = [1,2,3];
+  const initialPageNumbers = [1,2,3];
   const params = useParams();
   const dispatch = useDispatch();
   const cardsTotalCount = useSelector(getCardsTotalCount);
   const currentPageNumber = Number(params.number);
-  const [pageNumbers, setPageNumbers] = useState(initialPagaNumbers);
+  const [pageNumbers, setPageNumbers] = useState(initialPageNumbers);
 
   useEffect(()=> {
     dispatch(setCurrentPageOptions(`&_start=${(currentPageNumber - 1) * CARDS_COUNT_IN_PAGE}&_limit=${CARDS_COUNT_IN_PAGE}`))
@@ -28,7 +28,7 @@ function Pagination () :JSX.Element {
   return (
     <div className="pagination page-content__pagination">
       <ul className="pagination__list">
-        {pageNumbers[0] !== initialPagaNumbers[0] && <li className="pagination__page pagination__page--prev" id="prev"><Link className="link pagination__page-link" to={`/catalog/page_${pageNumbers[0] - 1}`} onClick={onPrevButtonClick}>Назад</Link>
+        {pageNumbers[0] !== initialPageNumbers[0] && <li className="pagination__page pagination__page--prev" id="prev"><Link className="link pagination__page-link" to={`/catalog/page_${pageNumbers[0] - 1}`} onClick={onPrevButtonClick}>Назад</Link>
         </li>}
         <li className={`pagination__page ${currentPageNumber === pageNumbers[0] ? 'pagination__page--active' : ''}`}><Link className="link pagination__page-link" to={`/catalog/page_${pageNumbers[0]}`}>{pageNumbers[0]}</Link>
         </li>

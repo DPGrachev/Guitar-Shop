@@ -10,6 +10,7 @@ type Guitar = {
   stringCount: number,
   rating: number,
   price: number,
+  comments: [],
 }
 
 type Filters = {

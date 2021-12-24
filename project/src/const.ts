@@ -1,6 +1,7 @@
 const enum AppRoute {
   Main = '/',
   Catalog = '/catalog/page_:number',
+  FirstCatalogPage = '/catalog/page_1',
   GuitarScreen = '/guitars/:id',
   NotFoundScreen = '404',
 }
