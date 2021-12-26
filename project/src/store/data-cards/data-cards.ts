@@ -1,7 +1,7 @@
-import { createReducer } from "@reduxjs/toolkit"
+import { createReducer } from '@reduxjs/toolkit';
 
-import { setCardsTotalCount, setGuitarCards, setMaxPrice, setMinPrice, setSimilarGuitarCards } from "../actions"
-import { DataCards } from "../../types/state"
+import { setCardsTotalCount, setGuitarCards, setMaxPrice, setMinPrice, setSimilarGuitarCards } from '../actions';
+import { DataCards } from '../../types/state';
 
 const initialState: DataCards = {
   guitarCards: [],
@@ -9,7 +9,7 @@ const initialState: DataCards = {
   maxPrice: 0,
   minPrice: 0,
   similarGuitarCards : [],
-}
+};
 
 const dataCards = createReducer(initialState,(builder) => {
   builder
@@ -27,7 +27,7 @@ const dataCards = createReducer(initialState,(builder) => {
     })
     .addCase(setSimilarGuitarCards, (state, action) => {
       state.similarGuitarCards = action.payload.guitarCards;
-    })
-})
+    });
+});
 
 export {dataCards};

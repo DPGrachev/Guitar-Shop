@@ -39,6 +39,6 @@ const stringsInGuitarType = {
   [GuitarType.Electric] : [4,6,7],
   [GuitarType.Ukulele] : [4],
   [GuitarType.Acoustic] : [6,7,12],
-}
+};
 
 export {AppRoute, ActionType, SortOption, RankingOption, GuitarType, stringsInGuitarType};

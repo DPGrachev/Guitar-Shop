@@ -1,13 +1,13 @@
-import { Link } from "react-router-dom";
-import { Guitar } from "../../types/guitar";
-import GuitarCardRating from "../guitar-card-rating/guitar-card-rating";
+import { Link } from 'react-router-dom';
+import { Guitar } from '../../types/guitar';
+import GuitarCardRating from '../guitar-card-rating/guitar-card-rating';
 
 type GuitarCardProps = {
   guitar: Guitar,
 }
 
 function GuitarCard ({guitar} : GuitarCardProps) :JSX.Element {
- 
+
   return (
     <div className="product-card"><img src={`../${guitar.previewImg}`} width="75" height="190" alt={guitar.name}/>
       <div className="product-card__info">
@@ -22,7 +22,7 @@ function GuitarCard ({guitar} : GuitarCardProps) :JSX.Element {
       <div className="product-card__buttons"><Link className="button button--mini" to={`/guitars/${guitar.id}`}>Подробнее</Link><a className="button button--red button--mini button--add-to-cart" href="/">Купить</a>
       </div>
     </div>
-  )
+  );
 }
 
 export default GuitarCard;

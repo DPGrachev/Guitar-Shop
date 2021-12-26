@@ -15,7 +15,7 @@ describe('Reducer: dataCards', () => {
       .toEqual(state);
   });
   it('should update guitarCards by load guitar cards', () => {
-    
+
     expect(dataCards(state, setGuitarCards(mockGuitars)))
       .toEqual({
         ...state,
@@ -27,34 +27,34 @@ describe('Reducer: dataCards', () => {
 
     const fakeTotalCount = 5;
     expect(dataCards(state, setCardsTotalCount(fakeTotalCount)))
-    .toEqual({
-      ...state,
-      cardsTotalCount: fakeTotalCount,
-    });
+      .toEqual({
+        ...state,
+        cardsTotalCount: fakeTotalCount,
+      });
   });
 
   it('should update maxPrice by max price in load guitar cards', () => {
 
     const fakeMaxPrice = 500;
     expect(dataCards(state, setMaxPrice(fakeMaxPrice)))
-    .toEqual({
-      ...state,
-      maxPrice: fakeMaxPrice,
-    });
+      .toEqual({
+        ...state,
+        maxPrice: fakeMaxPrice,
+      });
   });
 
   it('should update minPrice by min price in load guitar cards', () => {
 
     const fakeMinPrice = 100;
     expect(dataCards(state, setMinPrice(fakeMinPrice)))
-    .toEqual({
-      ...state,
-      minPrice: fakeMinPrice,
-    });
+      .toEqual({
+        ...state,
+        minPrice: fakeMinPrice,
+      });
   });
 
   it('should update similarGuitarCards by load guitar cards', () => {
-    
+
     expect(dataCards(state, setSimilarGuitarCards(mockGuitars)))
       .toEqual({
         ...state,

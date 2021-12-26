@@ -1,4 +1,4 @@
-import { Guitar } from "./guitar";
+import { Guitar } from './guitar';
 import {RootState} from '../store/root-reducer';
 
 type State = RootState;

@@ -13,9 +13,7 @@ const createAPI = () => {
   api.interceptors.response.use(
     (response) => response,
 
-    (error) => {
-      return Promise.reject(error);
-    },
+    (error) => Promise.reject(error),
   );
 
   return api;

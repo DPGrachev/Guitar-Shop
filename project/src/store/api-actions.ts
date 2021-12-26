@@ -1,6 +1,6 @@
-import { ThunkActionResult } from "../types/actions";
-import { Guitar } from "../types/guitar";
-import { setCardsTotalCount, setGuitarCards, setMaxPrice, setMinPrice, setSimilarGuitarCards } from "./actions";
+import { ThunkActionResult } from '../types/actions';
+import { Guitar } from '../types/guitar';
+import { setCardsTotalCount, setGuitarCards, setMaxPrice, setMinPrice, setSimilarGuitarCards } from './actions';
 import { toast } from 'react-toastify';
 
 const fetchGuitarCardsAction = (params: string) : ThunkActionResult =>
@@ -29,7 +29,6 @@ const fetchMinPriceAction = (params: string) : ThunkActionResult =>
       .then((response) => response.data)
       .then((response) => dispatch(setMinPrice(response[0].price)));
   };
-
 
 
 const fetchSimilarGuitarCardsAction = (searchString: string) : ThunkActionResult =>

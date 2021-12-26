@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { AppRoute } from "../../const";
-import Search from "../search/search";
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import Search from '../search/search';
 
 function Header(): JSX.Element {
   return (
@@ -20,7 +20,8 @@ function Header(): JSX.Element {
         <a className="header__cart-link" href="/" aria-label="Корзина">
           <svg className="header__cart-icon" width="14" height="14" aria-hidden="true">
             <use xlinkHref="#icon-basket"></use>
-          </svg><span className="visually-hidden">Перейти в корзину</span><span className="header__cart-count">2</span></a>
+          </svg><span className="visually-hidden">Перейти в корзину</span><span className="header__cart-count">2</span>
+        </a>
       </div>
     </header>
   );

@@ -13,15 +13,15 @@ describe('Component: Sort', () => {
   it('should render correctly', () => {
     render(
       <Provider store={store}>
-        <Router navigator={history} location={''}>
+        <Router history={history}>
           <Sort />
         </Router>
-      </Provider>
-    )
+      </Provider>,
+    );
 
     expect(screen.getByText(/Сортировать:/i)).toBeInTheDocument();
     expect(screen.getByText(/по цене/i)).toBeInTheDocument();
     expect(screen.getByText(/по популярности/i)).toBeInTheDocument();
-  })
+  });
 
 });

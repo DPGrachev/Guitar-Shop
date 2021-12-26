@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
+import {Router as  BrowserRouter} from 'react-router-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { rootReducer } from './store/root-reducer';
 import { Provider } from 'react-redux';
 import { createAPI } from './services/api';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { createBrowserHistory } from 'history';
 
 const api = createAPI();
+const browserHistory = createBrowserHistory();
 
 const store = configureStore({
   reducer: rootReducer,
@@ -23,9 +26,11 @@ const store = configureStore({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ToastContainer />
-      <App />
+      <BrowserRouter history={browserHistory}>
+        <ToastContainer />
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

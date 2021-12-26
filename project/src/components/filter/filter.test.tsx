@@ -26,17 +26,17 @@ describe('Component: Filter', () => {
   it('should render correctly', () => {
     render(
       <Provider store={store}>
-        <Router navigator={history} location={''}>
+        <Router history={history}>
           <Filter />
         </Router>
-      </Provider>
-    )
+      </Provider>,
+    );
 
     expect(screen.getByText(/Фильтр/i)).toBeInTheDocument();
     expect(screen.getByText(/Цена, ₽/i)).toBeInTheDocument();
     expect(screen.getByText(/Тип гитар/i)).toBeInTheDocument();
     expect(screen.getByText(/Количество струн/i)).toBeInTheDocument();
 
-  })
+  });
 
 });

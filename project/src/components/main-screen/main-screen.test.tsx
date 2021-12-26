@@ -1,28 +1,26 @@
 import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import {createMemoryHistory} from 'history';
-import NotFoundScreen from './not-found-screen';
-import { Provider } from 'react-redux';
+import MainScreen from './main-screen';
 import { configureMockStore } from '@jedmao/redux-mock-store';
+import { mockGuitars } from '../../utils/mocks';
+import { Provider } from 'react-redux';
 
-
-describe('Component: NotFoundScreen', () => {
+describe('Component: MainScreen', () => {
   const mockStore = configureMockStore();
   const store= mockStore({
-    DATA: {similarGuitarCards : []},
+    DATA: {similarGuitarCards : mockGuitars},
   });
   it('should render correctly', () => {
     const history = createMemoryHistory();
     render(
       <Provider store={store}>
         <Router history={history}>
-          <NotFoundScreen />
+          <MainScreen />
         </Router>,
       </Provider>,
     );
 
-    expect(screen.getByText('Такой страницы не существует')).toBeInTheDocument();
-    expect(screen.getByText(/вернуться на главную/i)).toBeInTheDocument();
-
+    expect(screen.getByText(/Главная страница/i)).toBeInTheDocument();
   });
 });

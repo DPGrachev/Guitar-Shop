@@ -1,29 +1,29 @@
-import { ChangeEvent, KeyboardEvent, useState } from "react";
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { getSimilarGuitarCards } from "../../store/data-cards/selectors";
-import {useNavigate} from 'react-router-dom'
-import { fetchSimilarGuitarCardsAction } from "../../store/api-actions";
+import { getSimilarGuitarCards } from '../../store/data-cards/selectors';
+import {useHistory} from 'react-router-dom';
+import { fetchSimilarGuitarCardsAction } from '../../store/api-actions';
 
 function Search (): JSX.Element {
   const similarGuitars = useSelector(getSimilarGuitarCards);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const history = useHistory();
   const [searchText, setSearchText] = useState('');
 
   const onTextChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    dispatch(fetchSimilarGuitarCardsAction(evt.target.value))
+    dispatch(fetchSimilarGuitarCardsAction(evt.target.value));
     setSearchText(evt.target.value);
-  }
+  };
 
   const onSuitableGuitarClick = (id: number) => {
-    navigate(`/guitars/${id}`);
-  }
+    history.push(`/guitars/${id}`);
+  };
 
   const onKeyDown = (evt: KeyboardEvent<HTMLLIElement>, id: number) => {
     if(evt.key === 'Enter'){
-      navigate(`/guitars/${id}`);
+      history.push(`/guitars/${id}`);
     }
-  }
+  };
 
   return (
     <div className="form-search">
@@ -40,7 +40,7 @@ function Search (): JSX.Element {
         {similarGuitars.map((guitar) => <li key={guitar.id} className="form-search__select-item" tabIndex={0} onClick={() => onSuitableGuitarClick(guitar.id)} onKeyDown={(evt) => onKeyDown(evt, guitar.id)}>{guitar.name}</li>)}
       </ul>
     </div>
-  )
+  );
 }
 
 export default Search;

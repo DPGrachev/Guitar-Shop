@@ -4,18 +4,27 @@ function Footer ():JSX.Element {
       <div className="footer__container container"><a className="footer__logo logo" href='/'><img className="logo__img" width="70" height="70" src="../img/svg/logo.svg" alt="Логотип"/></a>
         <div className="socials footer__socials">
           <ul className="socials__list">
-            <li className="socials-item"><a className="socials__link" href="https://www.facebook.com/" aria-label="facebook">
+            <li className="socials-item">
+              <a className="socials__link" href="https://www.facebook.com/" aria-label="facebook">
                 <svg className="socials__icon" width="24" height="24" aria-hidden="true">
                   <use xlinkHref="#icon-facebook"></use>
-                </svg></a></li>
-            <li className="socials-item"><a className="socials__link" href="https://www.instagram.com/" aria-label="instagram">
+                </svg>
+              </a>
+            </li>
+            <li className="socials-item">
+              <a className="socials__link" href="https://www.instagram.com/" aria-label="instagram">
                 <svg className="socials__icon" width="24" height="24" aria-hidden="true">
                   <use xlinkHref="#icon-instagram"></use>
-                </svg></a></li>
-            <li className="socials-item"><a className="socials__link" href="https://www.twitter.com/" aria-label="twitter">
+                </svg>
+              </a>
+            </li>
+            <li className="socials-item">
+              <a className="socials__link" href="https://www.twitter.com/" aria-label="twitter">
                 <svg className="socials__icon" width="24" height="24" aria-hidden="true">
                   <use xlinkHref="#icon-twitter"></use>
-                </svg></a></li>
+                </svg>
+              </a>
+            </li>
           </ul>
         </div>
         <section className="footer__nav-section footer__nav-section--info">
@@ -45,14 +54,17 @@ function Footer ():JSX.Element {
               <use xlinkHref="#icon-phone"></use>
             </svg><a className="link" href="tel:88125005050"> 8-812-500-50-50</a>
           </div>
-          <p className="footer__nav-content">Режим работы:<br/><span className="footer__span">
+          <p className="footer__nav-content">Режим работы:<br/>
+            <span className="footer__span">
               <svg className="footer__icon" width="13" height="13" aria-hidden="true">
                 <use xlinkHref="#icon-clock"></use>
-              </svg><span> с 11:00 до 20:00</span><span>без выходных</span></span></p>
+              </svg><span> с 11:00 до 20:00</span><span>без выходных</span>
+            </span>
+          </p>
         </section>
       </div>
     </footer>
-  )
+  );
 }
 
 export default Footer;

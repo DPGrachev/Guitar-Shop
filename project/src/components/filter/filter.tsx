@@ -1,10 +1,10 @@
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { GuitarType, stringsInGuitarType } from "../../const";
-import { setFiltersOptions } from "../../store/actions";
-import { fetchMaxPriceAction, fetchMinPriceAction } from "../../store/api-actions";
-import { getMaxPrice, getMinPrice } from "../../store/data-cards/selectors";
-import { Filters } from "../../types/guitar";
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { GuitarType, stringsInGuitarType } from '../../const';
+import { setFiltersOptions } from '../../store/actions';
+import { fetchMaxPriceAction, fetchMinPriceAction } from '../../store/api-actions';
+import { getMaxPrice, getMinPrice } from '../../store/data-cards/selectors';
+import { Filters } from '../../types/guitar';
 
 function Filter () :JSX.Element {
   const dispatch = useDispatch();
@@ -24,34 +24,34 @@ function Filter () :JSX.Element {
   const [priceRange , setPriceRange] = useState(initialFilters.priceRange);
 
   const guitarTypeOptions = useCallback(() => guitarTypeFilter.map((type) => `&type=${type}`).join(''), [guitarTypeFilter]);
-  const stringsCountOptions = useCallback(() => stringsCountFilter.map(value => `&stringCount=${value}`).join(''), [stringsCountFilter]);
+  const stringsCountOptions = useCallback(() => stringsCountFilter.map((value) => `&stringCount=${value}`).join(''), [stringsCountFilter]);
   const priceRangeOptions = useCallback(() => {
     if(priceRange[0] && priceRange[1]){
-     return `&price_gte=${priceRange[0]}&price_lte=${priceRange[1]}`
+      return `&price_gte=${priceRange[0]}&price_lte=${priceRange[1]}`;
     }
 
     return '';
-  }, [priceRange])
+  }, [priceRange]);
   const resetPriceRangeFields = () => {
     minPriceField.value = '';
     maxPriceField.value = '';
-  }
+  };
 
   useEffect(() => {
     dispatch(fetchMaxPriceAction(guitarTypeOptions()+stringsCountOptions()));
     dispatch(fetchMinPriceAction(guitarTypeOptions()+stringsCountOptions()));
-  },[dispatch, guitarTypeOptions, stringsCountOptions])
+  },[dispatch, guitarTypeOptions, stringsCountOptions]);
 
   useEffect(() => {
-    setPriceRange([minPrice,maxPrice])
-  },[minPrice,maxPrice])
+    setPriceRange([minPrice,maxPrice]);
+  },[minPrice,maxPrice]);
 
   useEffect(() => {
     if(priceRangeOptions()){
       dispatch(setFiltersOptions(`${guitarTypeOptions()}${priceRangeOptions()}${stringsCountOptions()}`));
     }
 
-  }, [dispatch, guitarTypeOptions, priceRangeOptions, stringsCountOptions])
+  }, [dispatch, guitarTypeOptions, priceRangeOptions, stringsCountOptions]);
 
   const onGuitarTypeChange = (evt: ChangeEvent<HTMLInputElement>) => {
     resetPriceRangeFields();
@@ -61,7 +61,7 @@ function Filter () :JSX.Element {
       return;
     }
     setGuitarTypeFilter([...guitarTypeFilter, type]);
-  }
+  };
 
   const onStringsCountChange = (evt: ChangeEvent<HTMLInputElement>) => {
     resetPriceRangeFields();
@@ -71,10 +71,10 @@ function Filter () :JSX.Element {
       return;
     }
     setStringsCountFilter([...stringsCountFilter, stringsCount]);
-  }
+  };
 
   const onPriceRangeChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    let value = Number(evt.currentTarget.value);
+    const value = Number(evt.currentTarget.value);
     if(evt.currentTarget.name === 'min'){
       if(value > priceRange[1]){
         evt.currentTarget.value = String(priceRange[1]);
@@ -92,18 +92,18 @@ function Filter () :JSX.Element {
     }
     evt.currentTarget.value = String(Math.min(value, maxPrice));
     setPriceRange([ priceRange[0] , Number(evt.currentTarget.value)]);
-  }
+  };
 
   const isActive = (value: number) => {
     if(guitarTypeFilter.length){
-      let possibleStrings = new Set();
+      const possibleStrings = new Set();
       guitarTypeFilter.forEach((type) => stringsInGuitarType[type].forEach((stringCount) => possibleStrings.add(stringCount)));
       if(!possibleStrings.has(value)){
         return true;
       }
     }
     return false;
-  }
+  };
 
 
   return (
@@ -157,7 +157,7 @@ function Filter () :JSX.Element {
         </div>
       </fieldset>
     </form>
-  )
+  );
 }
 
 export default Filter;

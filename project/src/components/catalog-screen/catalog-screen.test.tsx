@@ -3,7 +3,7 @@ import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
-import CatalogScreen from "./catalog-screen";
+import CatalogScreen from './catalog-screen';
 import { createAPI } from '../../services/api';
 import thunk, {ThunkDispatch} from 'redux-thunk';
 import {State} from '../../types/state';
@@ -21,35 +21,38 @@ describe('Component: CatalogScreen', () => {
       ThunkDispatch<State, typeof api, Action>
     >(middlewares);
 
-  const store= mockStore({
-    DATA: {
-      guitarCards : mockGuitars,
-      maxPrice: 1000,
-      minPrice: 10,
-    },
-    CATALOG: {
-      sortedOptions: '',
-      filtersOptions: '',
-      currentPageOptions: '',
-    }
-  });
   it('should render correctly with guitar cards', () => {
+    const store= mockStore({
+      DATA: {
+        guitarCards : mockGuitars,
+        similarGuitarCards : [],
+        maxPrice: 1000,
+        minPrice: 10,
+      },
+      CATALOG: {
+        sortedOptions: '',
+        filtersOptions: '',
+        currentPageOptions: '',
+      },
+    });
+
     render(
       <Provider store={store}>
-        <Router navigator={history} location={''}>
+        <Router history={history}>
           <CatalogScreen />
         </Router>
-      </Provider>
-    )
+      </Provider>,
+    );
 
     expect(screen.getByText(/Каталог гитар/i)).toBeInTheDocument();
     expect(screen.queryByText(/Загрузка.../i)).not.toBeInTheDocument();
-  })
+  });
 
   it('should render correctly without guitar cards', () => {
     const store= mockStore({
       DATA: {
         guitarCards : [],
+        similarGuitarCards : [],
         maxPrice: 0,
         minPrice: 0,
       },
@@ -57,17 +60,17 @@ describe('Component: CatalogScreen', () => {
         sortedOptions: '',
         filtersOptions: '',
         currentPageOptions: '',
-      }
+      },
     });
     render(
       <Provider store={store}>
-        <Router navigator={history} location={''}>
+        <Router history={history}>
           <CatalogScreen />
         </Router>
-      </Provider>
-    )
+      </Provider>,
+    );
 
     expect(screen.getByText(/Загрузка.../i)).toBeInTheDocument();
-  })
+  });
 
 });

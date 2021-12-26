@@ -11,20 +11,20 @@ const mockStore = configureMockStore();
 describe('Component: Header', () => {
   const store= mockStore({
     DATA: {similarGuitarCards : mockGuitars},
-  })
+  });
   it('should render correctly', () => {
     const history = createMemoryHistory();
     render(
       <Provider store={store}>
-        <Router navigator={history} location={''}>
+        <Router history={history}>
           <Header />
         </Router>
-      </Provider>
-    )
+      </Provider>,
+    );
 
     expect(screen.getByText(/Каталог/i)).toBeInTheDocument();
     expect(screen.getByText(/Где купить?/i)).toBeInTheDocument();
     expect(screen.getByText(/О компании/i)).toBeInTheDocument();
     expect(screen.getByText(/Перейти в корзину/i)).toBeInTheDocument();
-  })
+  });
 });

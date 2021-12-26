@@ -12,7 +12,7 @@ describe('Reducer: catalogScreen', () => {
       .toEqual(state);
   });
   it('should update sortedOptions by current options', () => {
-    
+
     const fakeSortedOptions = 'newSort';
     expect(catalogScreen(state, setSortedOptions(fakeSortedOptions)))
       .toEqual({

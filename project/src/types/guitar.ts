@@ -1,4 +1,4 @@
-import { GuitarType } from "../const";
+import { GuitarType } from '../const';
 
 type Guitar = {
   id: number,

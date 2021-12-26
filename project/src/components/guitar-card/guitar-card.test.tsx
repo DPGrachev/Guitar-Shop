@@ -9,15 +9,15 @@ describe('Component: GuitarCard', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
     render(
-      <Router navigator={history} location={''}>
+      <Router history={history}>
         <GuitarCard guitar={mockGuitarCard}/>
-      </Router>
-    )
+      </Router>,
+    );
 
     expect(screen.getByText(mockGuitarCard.name)).toBeInTheDocument();
     expect(screen.getByText(/рейтинг:/i)).toBeInTheDocument();
     expect(screen.getByText(/цена:/i)).toBeInTheDocument();
     expect(screen.getByText(/подробнее/i)).toBeInTheDocument();
     expect(screen.getByText(/купить/i)).toBeInTheDocument();
-  })
+  });
 });

@@ -17,7 +17,7 @@ function Sort() :JSX.Element {
     }
     setCurrentSortOption(evt.currentTarget.dataset.name as SortOption);
     dispatch(setSortedOptions(`&_sort=${evt.currentTarget.dataset.name}&_order=${rankingOption}`));
-  }
+  };
 
   const onRankingOptionClick = (evt: MouseEvent<HTMLButtonElement>) => {
     let sortOption = currentSortOption;
@@ -27,7 +27,7 @@ function Sort() :JSX.Element {
     }
     setCurrentRankingOption(evt.currentTarget.dataset.name as RankingOption);
     dispatch(setSortedOptions(`&_sort=${sortOption}&_order=${evt.currentTarget.dataset.name}`));
-  }
+  };
 
   return (
     <div className="catalog-sort">
@@ -41,7 +41,7 @@ function Sort() :JSX.Element {
         <button className={`catalog-sort__order-button catalog-sort__order-button--down ${currentRankingOption === RankingOption.HighToLow ? 'catalog-sort__order-button--active' : ''}`} aria-label="По убыванию"data-name={RankingOption.HighToLow} onClick={onRankingOptionClick}></button>
       </div>
     </div>
-  )
+  );
 }
 
 export default Sort;

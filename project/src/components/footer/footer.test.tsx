@@ -1,17 +1,17 @@
-import { render, screen } from "@testing-library/react"
-import { Router } from "react-router-dom"
+import { render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
 import {createMemoryHistory} from 'history';
-import Footer from "./footer";
+import Footer from './footer';
 
 
 describe('Component: Footer', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
     render(
-      <Router navigator={history} location={''}>
+      <Router history={history}>
         <Footer />
-      </Router>
-    )
+      </Router>,
+    );
 
     expect(screen.getByText('О нас')).toBeInTheDocument();
     expect(screen.getByText('Информация')).toBeInTheDocument();
@@ -20,5 +20,5 @@ describe('Component: Footer', () => {
     expect(screen.getByText(/м. Невский проспект,/i)).toBeInTheDocument();
     expect(screen.getByText('без выходных')).toBeInTheDocument();
 
-  })
-})
+  });
+});

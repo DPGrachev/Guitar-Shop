@@ -1,5 +1,5 @@
-import { State } from "../../types/state"
-import { NameSpace } from "../root-reducer"
+import { State } from '../../types/state';
+import { NameSpace } from '../root-reducer';
 import { createSelector } from 'reselect';
 
 const getSortedOptions = (state: State): string => state[NameSpace.Catalog].sortedOptions;
@@ -12,7 +12,7 @@ const getParams = createSelector(
   getSortedOptions,
   getFiltersOptions,
   getCurrentPageOptions,
-  (sortedOptions, filtersOptions, currentPageOptions) => filtersOptions + sortedOptions + currentPageOptions
-)
+  (sortedOptions, filtersOptions, currentPageOptions) => filtersOptions + sortedOptions + currentPageOptions,
+);
 
 export { getParams};

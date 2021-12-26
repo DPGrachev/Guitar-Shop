@@ -1,6 +1,6 @@
-import { createAction } from "@reduxjs/toolkit";
-import { ActionType } from "../const";
-import { Guitar } from "../types/guitar";
+import { createAction } from '@reduxjs/toolkit';
+import { ActionType } from '../const';
+import { Guitar } from '../types/guitar';
 
 const setGuitarCards = createAction(
   ActionType.SetGuitarCards,
@@ -52,26 +52,26 @@ const setSortedOptions = createAction(
   (params: string) => ({
     payload: {
       sortedOptions: params,
-    }
-  })
-)
+    },
+  }),
+);
 
 const setFiltersOptions = createAction(
   ActionType.SetFiltesOptions,
   (params: string) => ({
     payload: {
       filtersOptions: params,
-    }
-  })
-)
+    },
+  }),
+);
 
 const setCurrentPageOptions = createAction(
   ActionType.SetCurrentPageOptions,
   (params: string) => ({
     payload: {
       currentPageOptions: params,
-    }
-  })
-)
+    },
+  }),
+);
 
 export {setGuitarCards, setMaxPrice, setMinPrice, setCardsTotalCount, setSortedOptions, setFiltersOptions, setSimilarGuitarCards, setCurrentPageOptions};

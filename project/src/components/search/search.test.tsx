@@ -10,35 +10,36 @@ const mockStore = configureMockStore();
 const history = createMemoryHistory();
 
 describe('Component: Search', () => {
-  const store= mockStore({
-    DATA: {similarGuitarCards : mockGuitars},
-  })
   it('should render correctly with guitar cards', () => {
+    const store= mockStore({
+      DATA: {similarGuitarCards : mockGuitars},
+    });
+
     render(
       <Provider store={store}>
-        <Router navigator={history} location={''}>
+        <Router history={history}>
           <Search />
         </Router>
-      </Provider>
-    )
+      </Provider>,
+    );
 
     expect(screen.getByText(/Начать поиск/i)).toBeInTheDocument();
     expect(screen.getByRole('list').childNodes).toHaveLength(mockGuitars.length);
-  })
+  });
 
   it('should render correctly without guitar cards', () => {
     const store= mockStore({
       DATA: {similarGuitarCards : []},
-    })
+    });
     render(
       <Provider store={store}>
-        <Router navigator={history} location={''}>
+        <Router history={history}>
           <Search />
         </Router>
-      </Provider>
-    )
+      </Provider>,
+    );
 
     expect(screen.getByText(/Начать поиск/i)).toBeInTheDocument();
     expect(screen.getByRole('list').childNodes).toHaveLength(0);
-  })
+  });
 });
