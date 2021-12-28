@@ -9,7 +9,7 @@ function Sort() :JSX.Element {
   const [currentSortOption, setCurrentSortOption] = useState(SortOption.Default);
   const [currentRankingOption, setCurrentRankingOption] = useState(RankingOption.Default);
 
-  const onSortOptionClick = (evt: MouseEvent<HTMLButtonElement>) => {
+  const handleSortOptionClick = (evt: MouseEvent<HTMLButtonElement>) => {
     let rankingOption = currentRankingOption;
     if(currentRankingOption === RankingOption.Default){
       setCurrentRankingOption(RankingOption.LowToHigh);
@@ -19,7 +19,7 @@ function Sort() :JSX.Element {
     dispatch(setSortedOptions(`&_sort=${evt.currentTarget.dataset.name}&_order=${rankingOption}`));
   };
 
-  const onRankingOptionClick = (evt: MouseEvent<HTMLButtonElement>) => {
+  const handleRankingOptionClick = (evt: MouseEvent<HTMLButtonElement>) => {
     let sortOption = currentSortOption;
     if(currentSortOption === SortOption.Default){
       setCurrentSortOption(SortOption.Price);
@@ -33,12 +33,12 @@ function Sort() :JSX.Element {
     <div className="catalog-sort">
       <h2 className="catalog-sort__title">Сортировать:</h2>
       <div className="catalog-sort__type">
-        <button className={`catalog-sort__type-button ${currentSortOption === SortOption.Price ? 'catalog-sort__type-button--active' : ''}`} aria-label="по цене" tabIndex={-1} data-name={SortOption.Price} onClick={onSortOptionClick}>по цене</button>
-        <button className={`catalog-sort__type-button ${currentSortOption === SortOption.Rating ? 'catalog-sort__type-button--active' : ''}`} aria-label="по популярности" data-name={SortOption.Rating} onClick={onSortOptionClick}>по популярности</button>
+        <button className={`catalog-sort__type-button ${currentSortOption === SortOption.Price ? 'catalog-sort__type-button--active' : ''}`} aria-label="по цене" tabIndex={-1} data-name={SortOption.Price} onClick={handleSortOptionClick}>по цене</button>
+        <button className={`catalog-sort__type-button ${currentSortOption === SortOption.Rating ? 'catalog-sort__type-button--active' : ''}`} aria-label="по популярности" data-name={SortOption.Rating} onClick={handleSortOptionClick}>по популярности</button>
       </div>
       <div className="catalog-sort__order">
-        <button className={`catalog-sort__order-button catalog-sort__order-button--up ${currentRankingOption === RankingOption.LowToHigh ? 'catalog-sort__order-button--active' : ''}`} aria-label="По возрастанию" tabIndex={-1} data-name={RankingOption.LowToHigh} onClick={onRankingOptionClick}></button>
-        <button className={`catalog-sort__order-button catalog-sort__order-button--down ${currentRankingOption === RankingOption.HighToLow ? 'catalog-sort__order-button--active' : ''}`} aria-label="По убыванию"data-name={RankingOption.HighToLow} onClick={onRankingOptionClick}></button>
+        <button className={`catalog-sort__order-button catalog-sort__order-button--up ${currentRankingOption === RankingOption.LowToHigh ? 'catalog-sort__order-button--active' : ''}`} aria-label="По возрастанию" tabIndex={-1} data-name={RankingOption.LowToHigh} onClick={handleRankingOptionClick}></button>
+        <button className={`catalog-sort__order-button catalog-sort__order-button--down ${currentRankingOption === RankingOption.HighToLow ? 'catalog-sort__order-button--active' : ''}`} aria-label="По убыванию"data-name={RankingOption.HighToLow} onClick={handleRankingOptionClick}></button>
       </div>
     </div>
   );

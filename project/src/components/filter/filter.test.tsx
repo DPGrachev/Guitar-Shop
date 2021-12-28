@@ -21,7 +21,15 @@ describe('Component: Filter', () => {
     >(middlewares);
 
   const store= mockStore({
-    DATA: {maxPrice: 1000, minPrice: 10},
+    CATALOG: {
+      guitarTypeFilter: [],
+      stringCountFilter: [],
+      priceRangeFilter: [0,0],
+    },
+    DATA: {
+      maxPrice: 1000,
+      minPrice: 10,
+    },
   });
   it('should render correctly', () => {
     render(

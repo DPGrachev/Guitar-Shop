@@ -10,16 +10,16 @@ function Search (): JSX.Element {
   const history = useHistory();
   const [searchText, setSearchText] = useState('');
 
-  const onTextChange = (evt: ChangeEvent<HTMLInputElement>) => {
+  const handleTextChange = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(fetchSimilarGuitarCardsAction(evt.target.value));
     setSearchText(evt.target.value);
   };
 
-  const onSuitableGuitarClick = (id: number) => {
+  const handleSuitableGuitarClick = (id: number) => {
     history.push(`/guitars/${id}`);
   };
 
-  const onKeyDown = (evt: KeyboardEvent<HTMLLIElement>, id: number) => {
+  const HandleEnterKeyDown = (evt: KeyboardEvent<HTMLLIElement>, id: number) => {
     if(evt.key === 'Enter'){
       history.push(`/guitars/${id}`);
     }
@@ -33,11 +33,11 @@ function Search (): JSX.Element {
             <use xlinkHref="#icon-search"></use>
           </svg><span className="visually-hidden">Начать поиск</span>
         </button>
-        <input className="form-search__input" id="search" type="text" autoComplete="off" placeholder="что вы ищите?" onChange={onTextChange}/>
+        <input className="form-search__input" id="search" type="text" autoComplete="off" placeholder="что вы ищите?" onChange={handleTextChange}/>
         <label className="visually-hidden" htmlFor="search">Поиск</label>
       </form>
       <ul className={`form-search__select-list ${similarGuitars.length && searchText.length ? '' : 'hidden'}`} style={{zIndex: 1}}>
-        {similarGuitars.map((guitar) => <li key={guitar.id} className="form-search__select-item" tabIndex={0} onClick={() => onSuitableGuitarClick(guitar.id)} onKeyDown={(evt) => onKeyDown(evt, guitar.id)}>{guitar.name}</li>)}
+        {similarGuitars.map((guitar) => <li key={guitar.id} className="form-search__select-item" tabIndex={0} onClick={() => handleSuitableGuitarClick(guitar.id)} onKeyDown={(evt) => HandleEnterKeyDown(evt, guitar.id)}>{guitar.name}</li>)}
       </ul>
     </div>
   );

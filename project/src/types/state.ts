@@ -1,5 +1,6 @@
 import { Guitar } from './guitar';
 import {RootState} from '../store/root-reducer';
+import { GuitarType } from '../const';
 
 type State = RootState;
 
@@ -13,8 +14,10 @@ type DataCards = {
 
 type CatalogScreen = {
   sortedOptions: string,
-  filtersOptions: string,
   currentPageOptions: string,
+  guitarTypeFilter: GuitarType[],
+  stringCountFilter: number[],
+  priceRangeFilter: [number, number],
 }
 
 export type {State, DataCards, CatalogScreen};

@@ -11,6 +11,12 @@ import {Action} from 'redux';
 import { mockGuitars } from '../../utils/mocks';
 
 const history = createMemoryHistory();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useParams: () => ({
+    number: '1',
+  }),
+}));
 
 describe('Component: CatalogScreen', () => {
   const api = createAPI();
@@ -26,13 +32,16 @@ describe('Component: CatalogScreen', () => {
       DATA: {
         guitarCards : mockGuitars,
         similarGuitarCards : [],
+        cardsTotalCount : 27,
         maxPrice: 1000,
         minPrice: 10,
       },
       CATALOG: {
         sortedOptions: '',
-        filtersOptions: '',
         currentPageOptions: '',
+        guitarTypeFilter: [],
+        stringCountFilter: [],
+        priceRangeFilter: [0,0],
       },
     });
 
@@ -53,13 +62,16 @@ describe('Component: CatalogScreen', () => {
       DATA: {
         guitarCards : [],
         similarGuitarCards : [],
+        cardsTotalCount : 0,
         maxPrice: 0,
         minPrice: 0,
       },
       CATALOG: {
         sortedOptions: '',
-        filtersOptions: '',
         currentPageOptions: '',
+        guitarTypeFilter: [],
+        stringCountFilter: [],
+        priceRangeFilter: [0,0],
       },
     });
     render(

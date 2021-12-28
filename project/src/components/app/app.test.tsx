@@ -25,14 +25,17 @@ describe('Application Routing', () => {
   const store= mockStore({
     DATA: {
       guitarCards : mockGuitars,
-      similarGuitarCards: [],
+      similarGuitarCards : [],
+      cardsTotalCount : 27,
       maxPrice: 1000,
       minPrice: 10,
     },
     CATALOG: {
       sortedOptions: '',
-      filtersOptions: '',
       currentPageOptions: '',
+      guitarTypeFilter: [],
+      stringCountFilter: [],
+      priceRangeFilter: [0,0],
     },
   });
 

@@ -1,19 +1,19 @@
 import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import {createMemoryHistory} from 'history';
-import CardsCatalog from './cards-catalog';
-import { mockGuitars } from '../../utils/mocks';
+import { mockGuitarCard } from '../../utils/mocks';
+import GuitarCardRating from './guitar-card-rating';
 
 
-describe('Component: CardsCatalog', () => {
+describe('Component: GuitarCardRating', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
     render(
       <Router history={history}>
-        <CardsCatalog guitars={mockGuitars}/>
+        <GuitarCardRating guitar={mockGuitarCard}/>
       </Router>,
     );
 
-    expect(screen.getByTestId('cards_catalog_container')).toBeInTheDocument();
+    expect(screen.getAllByTestId('cards-rating-star')).toHaveLength(5);
   });
 });

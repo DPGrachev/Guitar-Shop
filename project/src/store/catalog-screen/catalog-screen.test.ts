@@ -1,11 +1,14 @@
-import { setCurrentPageOptions, setFiltersOptions, setSortedOptions } from '../actions';
+import { GuitarType } from '../../const';
+import { setCurrentPageOptions, setGuitarTypeFilter, setPriceRangeFilter, setSortedOptions, setStringsCountFilter } from '../actions';
 import { catalogScreen } from './catalog-screen';
 
 describe('Reducer: catalogScreen', () => {
   const state = {
     sortedOptions: '',
-    filtersOptions: '',
     currentPageOptions: '',
+    guitarTypeFilter: [],
+    stringCountFilter: [],
+    priceRangeFilter: [0, 0] as [number, number],
   };
   it('without additional parameters should return initial state', () => {
     expect(catalogScreen(void 0, {type: 'UNKNOWN_ACTION'}))
@@ -17,19 +20,10 @@ describe('Reducer: catalogScreen', () => {
     expect(catalogScreen(state, setSortedOptions(fakeSortedOptions)))
       .toEqual({
         sortedOptions: fakeSortedOptions,
-        filtersOptions: '',
         currentPageOptions: '',
-      });
-  });
-
-  it('should update filtersOptions by current filters', () => {
-
-    const fakeFiltersOptions = 'newFilters';
-    expect(catalogScreen(state, setFiltersOptions(fakeFiltersOptions)))
-      .toEqual({
-        sortedOptions: '',
-        filtersOptions: fakeFiltersOptions,
-        currentPageOptions: '',
+        guitarTypeFilter: [],
+        stringCountFilter: [],
+        priceRangeFilter: [0, 0],
       });
   });
 
@@ -39,9 +33,49 @@ describe('Reducer: catalogScreen', () => {
     expect(catalogScreen(state, setCurrentPageOptions(fakeCurrentPageOptions)))
       .toEqual({
         sortedOptions: '',
-        filtersOptions: '',
         currentPageOptions: fakeCurrentPageOptions,
+        guitarTypeFilter: [],
+        stringCountFilter: [],
+        priceRangeFilter: [0, 0],
       });
   });
 
+  it('should update guitarTypeFilter by current guitarTypes', () => {
+
+    const fakeGuitarTypes = [GuitarType.Electric, GuitarType.Ukulele];
+    expect(catalogScreen(state, setGuitarTypeFilter(fakeGuitarTypes)))
+      .toEqual({
+        sortedOptions: '',
+        currentPageOptions: '',
+        guitarTypeFilter: fakeGuitarTypes,
+        stringCountFilter: [],
+        priceRangeFilter: [0, 0],
+      });
+  });
+
+  it('should update stringCountFilter by current stringCounts', () => {
+
+    const fakeStringCountFilter = [4,6,7];
+    expect(catalogScreen(state, setStringsCountFilter(fakeStringCountFilter)))
+      .toEqual({
+        sortedOptions: '',
+        currentPageOptions: '',
+        guitarTypeFilter: [],
+        stringCountFilter: fakeStringCountFilter,
+        priceRangeFilter: [0, 0],
+      });
+  });
+
+  it('should update priceRangeFilter by current price range', () => {
+
+    const fakePriceRange = [10,100] as [number,number];
+    expect(catalogScreen(state, setPriceRangeFilter(fakePriceRange)))
+      .toEqual({
+        sortedOptions: '',
+        currentPageOptions: '',
+        guitarTypeFilter: [],
+        stringCountFilter: [],
+        priceRangeFilter: fakePriceRange,
+      });
+  });
 });

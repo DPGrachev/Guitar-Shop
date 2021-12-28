@@ -11,57 +11,58 @@ type Params = {
 
 function Pagination () :JSX.Element {
   const CARDS_COUNT_IN_PAGE = 9;
-  const initialPageNumbers = [1,2,3];
+  const MAX_PAGE_BUTTONS_COUNT = 3;
+
   const params: Params = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
   const cardsTotalCount = useSelector(getCardsTotalCount);
+  const [paginationSection, setPaginationSection] = useState(0);
+
   const currentPageNumber = Number(params.number);
-  const [pageNumbers, setPageNumbers] = useState(initialPageNumbers);
+  const maxPagesNumber = cardsTotalCount % CARDS_COUNT_IN_PAGE === 0 ? cardsTotalCount / CARDS_COUNT_IN_PAGE : Math.floor(cardsTotalCount / CARDS_COUNT_IN_PAGE) + 1;
+  const pages = new Array(maxPagesNumber).fill('').map((value, i) => value = i+1);
+  const currentPages = pages.slice(paginationSection * MAX_PAGE_BUTTONS_COUNT,paginationSection * MAX_PAGE_BUTTONS_COUNT + MAX_PAGE_BUTTONS_COUNT);
 
-  useEffect(()=> {
-    if(cardsTotalCount && (currentPageNumber - 1) * CARDS_COUNT_IN_PAGE >= cardsTotalCount ){
-      history.push(AppRoute.FirstCatalogPage);
-    }
-  },[cardsTotalCount,currentPageNumber, CARDS_COUNT_IN_PAGE, history ]);
-
-
-  if(!pageNumbers.includes(currentPageNumber)){
-    if(currentPageNumber % pageNumbers.length){
-      setPageNumbers(pageNumbers.map((number) => number + (pageNumbers.length * Math.floor(currentPageNumber / pageNumbers.length))));
+  if(cardsTotalCount && !currentPages.includes(currentPageNumber) && pages.includes(currentPageNumber)){
+    if(currentPageNumber % MAX_PAGE_BUTTONS_COUNT){
+      setPaginationSection(Math.floor(currentPageNumber / MAX_PAGE_BUTTONS_COUNT));
     }else{
-      setPageNumbers(pageNumbers.map((number) => number + (pageNumbers.length * (currentPageNumber / pageNumbers.length - 1))));
+      setPaginationSection(currentPageNumber / MAX_PAGE_BUTTONS_COUNT - 1);
     }
+  }else if(cardsTotalCount && !pages.includes(currentPageNumber)){
+    history.push(AppRoute.FirstCatalogPage);
   }
 
   useEffect(()=> {
     dispatch(setCurrentPageOptions(`&_start=${(currentPageNumber - 1) * CARDS_COUNT_IN_PAGE}&_limit=${CARDS_COUNT_IN_PAGE}`));
   },[dispatch, currentPageNumber]);
 
-  const onNextButtonClick = () => {
-    setPageNumbers(pageNumbers.map((number) => number += pageNumbers.length));
+  const handleNextButtonClick = () => {
+    setPaginationSection(paginationSection + 1);
   };
 
-  const onPrevButtonClick = () => {
-    setPageNumbers(pageNumbers.map((number) => number -= pageNumbers.length));
+  const handlePrevButtonClick = () => {
+    setPaginationSection(paginationSection - 1);
   };
 
   return (
     <div className="pagination page-content__pagination">
       <ul className="pagination__list">
-        {pageNumbers[0] !== initialPageNumbers[0] &&
-          <li className="pagination__page pagination__page--prev" id="prev"><Link className="link pagination__page-link" to={`/catalog/page_${pageNumbers[0] - 1}`} onClick={onPrevButtonClick}>Назад</Link>
+        {paginationSection > 0 &&
+          <li className="pagination__page pagination__page--prev" id="prev"><Link className="link pagination__page-link" to={`/catalog/page_${currentPages[0] - 1}`} onClick={handlePrevButtonClick}>Назад</Link>
           </li>}
-        <li className={`pagination__page ${currentPageNumber === pageNumbers[0] ? 'pagination__page--active' : ''}`}><Link className="link pagination__page-link" to={`/catalog/page_${pageNumbers[0]}`}>{pageNumbers[0]}</Link>
-        </li>
-        {cardsTotalCount > (pageNumbers[0] * CARDS_COUNT_IN_PAGE) &&
-          <li className={`pagination__page ${currentPageNumber === pageNumbers[1] ? 'pagination__page--active' : ''}`}><Link className="link pagination__page-link" to={`/catalog/page_${pageNumbers[1]}`}>{pageNumbers[1]}</Link>
+        {currentPages[0] &&
+          <li className={`pagination__page ${currentPageNumber === currentPages[0] ? 'pagination__page--active' : ''}`}><Link className="link pagination__page-link" to={`/catalog/page_${currentPages[0]}`}>{currentPages[0]}</Link>
           </li>}
-        {cardsTotalCount > (pageNumbers[1] * CARDS_COUNT_IN_PAGE) &&
-          <li className={`pagination__page ${currentPageNumber === pageNumbers[2] ? 'pagination__page--active' : ''}`}><Link className="link pagination__page-link" to={`/catalog/page_${pageNumbers[2]}`}>{pageNumbers[2]}</Link>
+        {currentPages[1] &&
+          <li className={`pagination__page ${currentPageNumber === currentPages[1] ? 'pagination__page--active' : ''}`}><Link className="link pagination__page-link" to={`/catalog/page_${currentPages[1]}`}>{currentPages[1]}</Link>
           </li>}
-        {cardsTotalCount > (pageNumbers[2] * CARDS_COUNT_IN_PAGE) &&
-          <li className="pagination__page pagination__page--next" id="next"><Link className="link pagination__page-link" to={`/catalog/page_${pageNumbers[2] + 1}`} onClick={onNextButtonClick}>Далее</Link>
+        {currentPages[2] &&
+          <li className={`pagination__page ${currentPageNumber === currentPages[2] ? 'pagination__page--active' : ''}`}><Link className="link pagination__page-link" to={`/catalog/page_${currentPages[2]}`}>{currentPages[2]}</Link>
+          </li>}
+        {pages.includes(currentPages[2]+1) &&
+          <li className="pagination__page pagination__page--next" id="next"><Link className="link pagination__page-link" to={`/catalog/page_${currentPages[2] + 1}`} onClick={handleNextButtonClick}>Далее</Link>
           </li>}
       </ul>
     </div>

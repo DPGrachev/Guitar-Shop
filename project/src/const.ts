@@ -13,6 +13,9 @@ const enum ActionType {
   SetMinPrice = 'data-cards/set-min-price',
   SetSimilarGuitarCards = 'data-cards/set-similar-guitar-cards',
   SetSortedOptions = 'catalog-screen/set-sorted-options',
+  SetGuitarTypeFilter = 'catalog-screen/set-guitar-type-filter',
+  SetStringsCountFilter = 'catalog-screen/set-strings-count-filter',
+  SetPriceRangeFilter = 'catalog-screen/set-price-range-filter',
   SetFiltesOptions = 'catalog-screen/set-filters-options',
   SetCurrentPageOptions = 'catalog-screen/set-current-page-options',
 }
