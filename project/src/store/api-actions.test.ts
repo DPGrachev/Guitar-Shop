@@ -29,7 +29,7 @@ describe('Async actions', () => {
 
     expect(store.getActions()).toEqual([]);
 
-    await store.dispatch(fetchGuitarCardsAction(fakeParams));
+    await store.dispatch(fetchGuitarCardsAction(fakeParams,'',''));
 
     expect(store.getActions()).toEqual([
       setCardsTotalCount(mockGuitars.length),
@@ -81,7 +81,7 @@ describe('Async actions', () => {
     await store.dispatch(fetchSimilarGuitarCardsAction(fakeName));
 
     expect(store.getActions()).toEqual([
-      setSimilarGuitarCards(mockGuitars),
+      setSimilarGuitarCards(mockGuitars.sort((a,b) => a.name.toLowerCase().indexOf(fakeName.toLowerCase()) - b.name.toLowerCase().indexOf(fakeName.toLowerCase()))),
     ]);
   });
 });

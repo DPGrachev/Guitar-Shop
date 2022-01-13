@@ -20,11 +20,4 @@ const getFiltersOptions = createSelector(
   (guitarTypes, stringCounts, priceRange) => guitarTypes.map((type) => `&type=${type}`).join('') + stringCounts.map((value) => `&stringCount=${value}`).join('') + (priceRange[0] ? `&price_gte=${priceRange[0]}` : '') + (priceRange[1] ? `&price_lte=${priceRange[1]}` : ''),
 );
 
-const getParams = createSelector(
-  getSortedOptions,
-  getFiltersOptions,
-  getCurrentPageOptions,
-  (sortedOptions, filtersOptions, currentPageOptions) => filtersOptions + sortedOptions + currentPageOptions,
-);
-
-export {getGuitarTypeFilter, getStringCountFilter, getPriceRangeFilter, getParams};
+export {getGuitarTypeFilter, getStringCountFilter, getCurrentPageOptions, getSortedOptions, getPriceRangeFilter, getFiltersOptions};

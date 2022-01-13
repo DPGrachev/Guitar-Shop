@@ -27,8 +27,10 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter history={browserHistory}>
-        <ToastContainer />
-        <App />
+        <div className="wrapper">
+          <ToastContainer />
+          <App />
+        </div>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

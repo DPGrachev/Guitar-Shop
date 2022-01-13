@@ -1,13 +1,20 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { setGuitarTypeFilter, setStringsCountFilter, setCurrentPageOptions, setPriceRangeFilter, setSortedOptions } from '../actions';
 import { CatalogScreen } from '../../types/state';
+import { GuitarType } from '../../const';
+
+const urlParams = new URLSearchParams(window.location.search);
+const initialGuitarTypes = urlParams.getAll('type') as GuitarType[];
+const initialScrtingCount = urlParams.getAll('stringCount').map((value) => Number(value));
+const initialMinPrice = Number(urlParams.get('price_gte'));
+const initialMaxPrice = Number(urlParams.get('price_lte'));
 
 const initialState: CatalogScreen = {
   sortedOptions: '',
   currentPageOptions: '',
-  guitarTypeFilter: [],
-  stringCountFilter: [],
-  priceRangeFilter: [0, 0],
+  guitarTypeFilter: initialGuitarTypes,
+  stringCountFilter: initialScrtingCount,
+  priceRangeFilter: [initialMinPrice, initialMaxPrice],
 };
 
 const catalogScreen = createReducer(initialState,(builder) => {

@@ -3,10 +3,10 @@ import { Guitar } from '../types/guitar';
 import { setCardsTotalCount, setGuitarCards, setMaxPrice, setMinPrice, setSimilarGuitarCards } from './actions';
 import { toast } from 'react-toastify';
 
-const fetchGuitarCardsAction = (params: string) : ThunkActionResult =>
+const fetchGuitarCardsAction = (params: string, sortedOptions: string, currentPageOptions: string) : ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     try{
-      await api.get<Guitar[]>(`/guitars?_embed=comments${params}`)
+      await api.get<Guitar[]>(`/guitars?_embed=comments${params}${sortedOptions}${currentPageOptions}`)
         .then((response) => {
           dispatch(setCardsTotalCount(Number(response.headers['x-total-count'])));
           dispatch(setGuitarCards(response.data));
@@ -34,7 +34,7 @@ const fetchMinPriceAction = (params: string) : ThunkActionResult =>
 const fetchSimilarGuitarCardsAction = (searchString: string) : ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
     await api.get<Guitar[]>(`/guitars?name_like=${searchString}`)
-      .then((response) => dispatch(setSimilarGuitarCards(response.data)));
+      .then((response) => dispatch(setSimilarGuitarCards(response.data.sort((a,b) => a.name.toLowerCase().indexOf(searchString.toLowerCase()) - b.name.toLowerCase().indexOf(searchString.toLowerCase())))));
   };
 
 

@@ -46,8 +46,8 @@ describe('Component: Pagination', () => {
       </Provider>,
     );
 
-    expect(screen.getByRole('list').childNodes).toHaveLength(3);
-    expect(screen.queryByText('Далее')).not.toBeInTheDocument();
+    expect(screen.getByRole('list').childNodes).toHaveLength(4);
+    expect(screen.getByText('Далее')).toBeInTheDocument();
   });
 
   it('should render correctly with cards total count = 8', () => {

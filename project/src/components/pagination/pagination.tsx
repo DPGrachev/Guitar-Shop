@@ -38,19 +38,11 @@ function Pagination () :JSX.Element {
     dispatch(setCurrentPageOptions(`&_start=${(currentPageNumber - 1) * CARDS_COUNT_IN_PAGE}&_limit=${CARDS_COUNT_IN_PAGE}`));
   },[dispatch, currentPageNumber]);
 
-  const handleNextButtonClick = () => {
-    setPaginationSection(paginationSection + 1);
-  };
-
-  const handlePrevButtonClick = () => {
-    setPaginationSection(paginationSection - 1);
-  };
-
   return (
     <div className="pagination page-content__pagination">
       <ul className="pagination__list">
-        {paginationSection > 0 &&
-          <li className="pagination__page pagination__page--prev" id="prev"><Link className="link pagination__page-link" to={`/catalog/page_${currentPages[0] - 1}`} onClick={handlePrevButtonClick}>Назад</Link>
+        {currentPageNumber > 1 &&
+          <li className="pagination__page pagination__page--prev" id="prev"><Link className="link pagination__page-link" to={`/catalog/page_${currentPageNumber - 1}`} >Назад</Link>
           </li>}
         {currentPages[0] &&
           <li className={`pagination__page ${currentPageNumber === currentPages[0] ? 'pagination__page--active' : ''}`}><Link className="link pagination__page-link" to={`/catalog/page_${currentPages[0]}`}>{currentPages[0]}</Link>
@@ -61,8 +53,8 @@ function Pagination () :JSX.Element {
         {currentPages[2] &&
           <li className={`pagination__page ${currentPageNumber === currentPages[2] ? 'pagination__page--active' : ''}`}><Link className="link pagination__page-link" to={`/catalog/page_${currentPages[2]}`}>{currentPages[2]}</Link>
           </li>}
-        {pages.includes(currentPages[2]+1) &&
-          <li className="pagination__page pagination__page--next" id="next"><Link className="link pagination__page-link" to={`/catalog/page_${currentPages[2] + 1}`} onClick={handleNextButtonClick}>Далее</Link>
+        {currentPageNumber+1 <= maxPagesNumber &&
+          <li className="pagination__page pagination__page--next" id="next"><Link className="link pagination__page-link" to={`/catalog/page_${currentPageNumber + 1}`} >Далее</Link>
           </li>}
       </ul>
     </div>
