@@ -11,6 +11,15 @@ const setGuitarCards = createAction(
   }),
 );
 
+const setCurrentGuitarCard = createAction(
+  ActionType.setCurrentGuitarCard,
+  (card: Guitar) => ({
+    payload: {
+      guitarCard: card,
+    },
+  }),
+);
+
 const setCardsTotalCount = createAction(
   ActionType.SetCardsTotalCount,
   (totalCount: number) => ({
@@ -94,6 +103,7 @@ const setPriceRangeFilter = createAction(
 
 export {
   setGuitarCards,
+  setCurrentGuitarCard,
   setMaxPrice,
   setMinPrice,
   setCardsTotalCount,

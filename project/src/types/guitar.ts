@@ -1,4 +1,5 @@
 import { GuitarType } from '../const';
+import { Comment } from './comment';
 
 type Guitar = {
   id: number,
@@ -10,7 +11,7 @@ type Guitar = {
   stringCount: number,
   rating: number,
   price: number,
-  comments: [],
+  comments: Comment[],
 }
 
 type Filters = {

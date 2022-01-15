@@ -8,6 +8,7 @@ const enum AppRoute {
 
 const enum ActionType {
   SetGuitarCards = 'data-cards/set-guitar-cards',
+  setCurrentGuitarCard = 'data-cards/set-current-guitar-card',
   SetCardsTotalCount = 'data-cards/set-cards-total-count',
   SetMaxPrice = 'data-cards/set-max-price',
   SetMinPrice = 'data-cards/set-min-price',
@@ -38,10 +39,16 @@ enum GuitarType {
   Acoustic = 'acoustic',
 }
 
+const GuitarTypeTranslate = {
+  [GuitarType.Electric] : 'Электрогитара',
+  [GuitarType.Ukulele] : 'Укулеле',
+  [GuitarType.Acoustic] : 'Акустическая гитара',
+};
+
 const stringsInGuitarType = {
   [GuitarType.Electric] : [4,6,7],
   [GuitarType.Ukulele] : [4],
   [GuitarType.Acoustic] : [6,7,12],
 };
 
-export {AppRoute, ActionType, SortOption, RankingOption, GuitarType, stringsInGuitarType};
+export {AppRoute, ActionType, SortOption, RankingOption, GuitarType, GuitarTypeTranslate, stringsInGuitarType};

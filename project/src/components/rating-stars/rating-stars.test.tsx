@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import { mockGuitarCard } from '../../utils/mocks';
-import GuitarCardRating from './guitar-card-rating';
+import RatingStars from './rating-stars';
 
 
 describe('Component: GuitarCardRating', () => {
@@ -10,7 +10,7 @@ describe('Component: GuitarCardRating', () => {
     const history = createMemoryHistory();
     render(
       <Router history={history}>
-        <GuitarCardRating guitar={mockGuitarCard}/>
+        <RatingStars rating={mockGuitarCard.rating} id={mockGuitarCard.id}/>
       </Router>,
     );
 

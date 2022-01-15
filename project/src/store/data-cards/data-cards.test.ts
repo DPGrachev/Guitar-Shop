@@ -5,6 +5,7 @@ import { dataCards } from './data-cards';
 describe('Reducer: dataCards', () => {
   const state = {
     guitarCards: [],
+    currentGuitarCard: null,
     cardsTotalCount: 0,
     maxPrice: 0,
     minPrice: 0,

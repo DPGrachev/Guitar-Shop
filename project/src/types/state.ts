@@ -6,6 +6,7 @@ type State = RootState;
 
 type DataCards = {
   guitarCards: Guitar[],
+  currentGuitarCard: Guitar | null,
   cardsTotalCount: number,
   maxPrice: number,
   minPrice: number,

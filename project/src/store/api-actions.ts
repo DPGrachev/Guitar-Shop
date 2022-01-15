@@ -1,6 +1,6 @@
 import { ThunkActionResult } from '../types/actions';
 import { Guitar } from '../types/guitar';
-import { setCardsTotalCount, setGuitarCards, setMaxPrice, setMinPrice, setSimilarGuitarCards } from './actions';
+import { setCardsTotalCount, setCurrentGuitarCard, setGuitarCards, setMaxPrice, setMinPrice, setSimilarGuitarCards } from './actions';
 import { toast } from 'react-toastify';
 
 const fetchGuitarCardsAction = (params: string, sortedOptions: string, currentPageOptions: string) : ThunkActionResult =>
@@ -10,6 +10,18 @@ const fetchGuitarCardsAction = (params: string, sortedOptions: string, currentPa
         .then((response) => {
           dispatch(setCardsTotalCount(Number(response.headers['x-total-count'])));
           dispatch(setGuitarCards(response.data));
+        });
+    }catch{
+      toast.error('Сервер временно недоступен');
+    }
+  };
+
+const fetchCurrentGuitarCardAction = (id: number) : ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    try{
+      await api.get<Guitar>(`/guitars/${id}?_embed=comments`)
+        .then((response) => {
+          dispatch(setCurrentGuitarCard(response.data));
         });
     }catch{
       toast.error('Сервер временно недоступен');
@@ -38,4 +50,4 @@ const fetchSimilarGuitarCardsAction = (searchString: string) : ThunkActionResult
   };
 
 
-export { fetchGuitarCardsAction, fetchMaxPriceAction, fetchMinPriceAction, fetchSimilarGuitarCardsAction };
+export { fetchGuitarCardsAction, fetchCurrentGuitarCardAction, fetchMaxPriceAction, fetchMinPriceAction, fetchSimilarGuitarCardsAction };
