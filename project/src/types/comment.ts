@@ -9,4 +9,13 @@ type Comment = {
   guitarId: number
 }
 
-export type {Comment};
+type CommentPost = {
+  guitarId: number,
+  userName: string,
+  advantage: string,
+  disadvantage: string,
+  comment: string,
+  rating: number,
+}
+
+export type {Comment, CommentPost};

@@ -2,6 +2,7 @@ import { ThunkActionResult } from '../types/actions';
 import { Guitar } from '../types/guitar';
 import { setCardsTotalCount, setCurrentGuitarCard, setGuitarCards, setMaxPrice, setMinPrice, setSimilarGuitarCards } from './actions';
 import { toast } from 'react-toastify';
+import { CommentPost } from '../types/comment';
 
 const fetchGuitarCardsAction = (params: string, sortedOptions: string, currentPageOptions: string) : ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -49,5 +50,21 @@ const fetchSimilarGuitarCardsAction = (searchString: string) : ThunkActionResult
       .then((response) => dispatch(setSimilarGuitarCards(response.data.sort((a,b) => a.name.toLowerCase().indexOf(searchString.toLowerCase()) - b.name.toLowerCase().indexOf(searchString.toLowerCase())))));
   };
 
+const postNewComment = (comment: CommentPost) : ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    try{
+      await api.post<Guitar[]>('/comments', comment)
+        .then(() => dispatch(fetchCurrentGuitarCardAction(comment.guitarId)));
+    }catch{
+      toast.error('Сервер временно недоступен, отзыв не может быть отправлен');
+    }
+  };
 
-export { fetchGuitarCardsAction, fetchCurrentGuitarCardAction, fetchMaxPriceAction, fetchMinPriceAction, fetchSimilarGuitarCardsAction };
+export {
+  fetchGuitarCardsAction,
+  fetchCurrentGuitarCardAction,
+  fetchMaxPriceAction,
+  fetchMinPriceAction,
+  fetchSimilarGuitarCardsAction,
+  postNewComment
+};

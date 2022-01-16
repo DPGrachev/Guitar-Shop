@@ -10,6 +10,11 @@ import Footer from '../footer/footer';
 import RatingStars from '../rating-stars/rating-stars';
 import Header from '../header/header';
 import CommentItem from '../comment/comment';
+import dayjs from 'dayjs';
+import NewCommentPopup from '../new_comment_popup/new_comment_popup';
+import { Guitar } from '../../types/guitar';
+import FocusLock from 'react-focus-lock';
+import {RemoveScroll} from 'react-remove-scroll';
 
 type Params = {
   id: string,
@@ -21,11 +26,26 @@ enum Tabs {
 }
 
 function GuitarScreen ():JSX.Element {
+  const COMMENTS_STEP = 3;
   const params: Params = useParams();
   const dispatch = useDispatch();
   const currentGuitarCard = useSelector(getCurrentGuitarCard);
   const currentGuitarCardId = Number(params.id);
   const [currentTab, setCurrentTab] = useState(Tabs.characteristics);
+  const [openedCommentsCurrent, setOpenedCommentsCurrent] = useState(COMMENTS_STEP);
+  const [isNewCommentForm, setIsNewCommentForm] = useState(false);
+  const comments = currentGuitarCard?.comments.slice().sort((a,b) => dayjs(b.createAt).diff(dayjs(a.createAt)));
+
+  useEffect(() => {
+    if(isNewCommentForm){
+      window.addEventListener('keydown', handleEscKeydown);
+      window.addEventListener('scroll', (evt) => evt.preventDefault());
+      // onScroll={(evt) => evt.preventDefault()}
+      return function cleanup() {
+        window.removeEventListener('keydown', handleEscKeydown);
+      };
+    }
+  });
 
   useEffect(() => {
     dispatch(fetchCurrentGuitarCardAction(currentGuitarCardId));
@@ -39,11 +59,37 @@ function GuitarScreen ():JSX.Element {
     setCurrentTab(evt.currentTarget.dataset.name as Tabs);
   };
 
+  const handleEscKeydown = (evt: KeyboardEvent) => {
+    if(evt.key === 'Escape'){
+      setIsNewCommentForm(false);
+    }
+  };
+
+  const handleShowMoreButtonClick = () => {
+    if(currentGuitarCard && currentGuitarCard.comments.length > openedCommentsCurrent){
+      setOpenedCommentsCurrent(openedCommentsCurrent + COMMENTS_STEP);
+    }
+  };
+
+  const handleAddNewCommentButtonClick = (evt: MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    setIsNewCommentForm(true);
+  };
+
+  const closeNewCommentForm = () => {
+    setIsNewCommentForm(false);
+  };
+
   return (
     <>
       <Header />
-
       <main className="page-content">
+        {isNewCommentForm &&
+          <FocusLock>
+            <RemoveScroll>
+              <NewCommentPopup guitar={currentGuitarCard as Guitar} onCloseButtonClick={closeNewCommentForm}/>
+            </RemoveScroll>
+          </FocusLock>}
         <div className="container">
           {!currentGuitarCard || currentGuitarCard.id !== currentGuitarCardId
             ? <h1>...Загрузка</h1>
@@ -93,9 +139,10 @@ function GuitarScreen ():JSX.Element {
                 </div>
               </div>
               <section className="reviews">
-                <h3 className="reviews__title title title--bigger">Отзывы</h3><a className="button button--red-border button--big reviews__sumbit-button" href="/">Оставить отзыв</a>
-                {currentGuitarCard.comments.map((comment) => <CommentItem comment={comment} key={comment.id}/>)}
-                <button className="button button--medium reviews__more-button">Показать еще отзывы</button><a className="button button--up button--red-border button--big reviews__up-button" href="#header">Наверх</a>
+                <h3 className="reviews__title title title--bigger">Отзывы</h3><a className="button button--red-border button--big reviews__sumbit-button" href="/" onClick={handleAddNewCommentButtonClick}>Оставить отзыв</a>
+                {comments?.slice(0,openedCommentsCurrent).map((comment) => <CommentItem comment={comment} key={comment.id}/>)}
+                {comments && comments.length > openedCommentsCurrent && <button className="button button--medium reviews__more-button" onClick={handleShowMoreButtonClick}>Показать еще отзывы</button>}
+                <a className="button button--up button--red-border button--big reviews__up-button" href="#header">Наверх</a>
               </section>
             </>}
         </div>
