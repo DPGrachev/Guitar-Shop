@@ -7,7 +7,7 @@ import { createAPI } from '../../services/api';
 import thunk, {ThunkDispatch} from 'redux-thunk';
 import {State} from '../../types/state';
 import {Action} from 'redux';
-import { mockGuitars } from '../../utils/mocks';
+import { mockGuitarCard, mockGuitars } from '../../utils/mocks';
 import App from './app';
 import { AppRoute } from '../../const';
 
@@ -25,6 +25,7 @@ describe('Application Routing', () => {
   const store= mockStore({
     DATA: {
       guitarCards : mockGuitars,
+      currentGuitarCard: mockGuitarCard,
       similarGuitarCards : [],
       cardsTotalCount : 27,
       maxPrice: 1000,
@@ -64,7 +65,9 @@ describe('Application Routing', () => {
     history.push('/guitars/1');
     render(fakeApp);
 
-    expect(screen.getByText(/Страница в разработке/i)).toBeInTheDocument();
+    expect(screen.getByText(/Характеристики/i)).toBeInTheDocument();
+    expect(screen.getByText(/Добавить в корзину/i)).toBeInTheDocument();
+    expect(screen.getByText(/Оставить отзыв/i)).toBeInTheDocument();
   });
 
   it('should render "NotFoundScreen" when user navigate to non-existent route', () => {

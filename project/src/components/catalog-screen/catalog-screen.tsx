@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getGuitarCards } from '../../store/data-cards/selectors';
 import { fetchGuitarCardsAction } from '../../store/api-actions';
-import { getFiltersOptions, getCurrentPageOptions, getSortedOptions } from '../../store/catalog-screen/selectors';
+import { getFiltersOptions, getCurrentPageOptions, getSortedOptions } from '../../store/catalog/selectors';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Header from '../header/header';

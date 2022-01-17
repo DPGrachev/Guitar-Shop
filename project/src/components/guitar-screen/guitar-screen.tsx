@@ -9,7 +9,7 @@ import { getCurrentGuitarCard } from '../../store/data-cards/selectors';
 import Footer from '../footer/footer';
 import RatingStars from '../rating-stars/rating-stars';
 import Header from '../header/header';
-import CommentItem from '../comment/comment';
+import CommentItem from '../comment-item/comment-item';
 import dayjs from 'dayjs';
 import NewCommentPopup from '../new_comment_popup/new_comment_popup';
 import { Guitar } from '../../types/guitar';
@@ -39,8 +39,6 @@ function GuitarScreen ():JSX.Element {
   useEffect(() => {
     if(isNewCommentForm){
       window.addEventListener('keydown', handleEscKeydown);
-      window.addEventListener('scroll', (evt) => evt.preventDefault());
-      // onScroll={(evt) => evt.preventDefault()}
       return function cleanup() {
         window.removeEventListener('keydown', handleEscKeydown);
       };
@@ -74,6 +72,11 @@ function GuitarScreen ():JSX.Element {
   const handleAddNewCommentButtonClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
     setIsNewCommentForm(true);
+  };
+
+  const handleUpButtonClick = (evt: MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    window.scroll(0,0);
   };
 
   const closeNewCommentForm = () => {
@@ -116,18 +119,21 @@ function GuitarScreen ():JSX.Element {
                     <a className={`button button--medium tabs__button ${currentTab !== Tabs.description ? 'button--black-border' : ''}`} href="#description" data-name={Tabs.description} onClick={handleTabsClick}>Описание</a>
                     <div className="tabs__content" id={currentTab}>
                       <table className={`tabs__table ${currentTab !== Tabs.characteristics ? 'hidden' : ''}`}>
-                        <tr className="tabs__table-row">
-                          <td className="tabs__title">Артикул:</td>
-                          <td className="tabs__value">{currentGuitarCard.vendorCode}</td>
-                        </tr>
-                        <tr className="tabs__table-row">
-                          <td className="tabs__title">Тип:</td>
-                          <td className="tabs__value">{GuitarTypeTranslate[currentGuitarCard.type]}</td>
-                        </tr>
-                        <tr className="tabs__table-row">
-                          <td className="tabs__title">Количество струн:</td>
-                          <td className="tabs__value">{currentGuitarCard.stringCount} струнная</td>
-                        </tr>
+                        <tbody>
+                          <tr className="tabs__table-row">
+                            <td className="tabs__title">Артикул:</td>
+                            <td className="tabs__value">{currentGuitarCard.vendorCode}</td>
+                          </tr>
+                          <tr className="tabs__table-row">
+                            <td className="tabs__title">Тип:</td>
+                            <td className="tabs__value">{GuitarTypeTranslate[currentGuitarCard.type]}</td>
+                          </tr>
+                          <tr className="tabs__table-row">
+                            <td className="tabs__title">Количество струн:</td>
+                            <td className="tabs__value">{currentGuitarCard.stringCount} струнная</td>
+                          </tr>
+                        </tbody>
+
                       </table>
                       <p className={`tabs__product-description ${currentTab !== Tabs.description ? 'hidden' : ''}`}>{currentGuitarCard.description}</p>
                     </div>
@@ -135,14 +141,15 @@ function GuitarScreen ():JSX.Element {
                 </div>
                 <div className="product-container__price-wrapper">
                   <p className="product-container__price-info product-container__price-info--title">Цена:</p>
-                  <p className="product-container__price-info product-container__price-info--value">{new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0 }).format(currentGuitarCard.price)}</p><a className="button button--red button--big product-container__button" href="/">Добавить в корзину</a>
+                  <p className="product-container__price-info product-container__price-info--value">{new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0, minimumFractionDigits: 0}).format(currentGuitarCard.price)}</p><a className="button button--red button--big product-container__button" href="/">Добавить в корзину</a>
                 </div>
               </div>
               <section className="reviews">
                 <h3 className="reviews__title title title--bigger">Отзывы</h3><a className="button button--red-border button--big reviews__sumbit-button" href="/" onClick={handleAddNewCommentButtonClick}>Оставить отзыв</a>
+                {comments?.length === 0 && <h3 className="reviews__title title title--bigger">На данный товар еще не написано отзывов</h3>}
                 {comments?.slice(0,openedCommentsCurrent).map((comment) => <CommentItem comment={comment} key={comment.id}/>)}
                 {comments && comments.length > openedCommentsCurrent && <button className="button button--medium reviews__more-button" onClick={handleShowMoreButtonClick}>Показать еще отзывы</button>}
-                <a className="button button--up button--red-border button--big reviews__up-button" href="#header">Наверх</a>
+                <a className="button button--up button--red-border button--big reviews__up-button" href="#header" onClick={handleUpButtonClick}>Наверх</a>
               </section>
             </>}
         </div>

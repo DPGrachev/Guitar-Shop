@@ -17,7 +17,7 @@ function CommentItem ({comment} : CommentProps):JSX.Element {
         <RatingStars rating={comment.rating} id={comment.id} isComment/>
         <span className="rate__count"></span><span className="rate__message"></span>
       </div>
-      <h4 className="review__title title title--lesser">Достоинста:</h4>
+      <h4 className="review__title title title--lesser">Достоинства:</h4>
       <p className="review__value">{comment.advantage}</p>
       <h4 className="review__title title title--lesser">Недостатки:</h4>
       <p className="review__value">{comment.disadvantage}</p>

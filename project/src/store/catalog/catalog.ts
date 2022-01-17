@@ -17,7 +17,7 @@ const initialState: CatalogScreen = {
   priceRangeFilter: [initialMinPrice, initialMaxPrice],
 };
 
-const catalogScreen = createReducer(initialState,(builder) => {
+const catalog = createReducer(initialState,(builder) => {
   builder
     .addCase(setSortedOptions, (state, action) => {
       state.sortedOptions = action.payload.sortedOptions;
@@ -36,5 +36,5 @@ const catalogScreen = createReducer(initialState,(builder) => {
     });
 });
 
-export {catalogScreen};
+export {catalog};
 

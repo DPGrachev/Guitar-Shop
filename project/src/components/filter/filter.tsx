@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { GuitarType, stringsInGuitarType } from '../../const';
 import { setGuitarTypeFilter, setStringsCountFilter, setPriceRangeFilter } from '../../store/actions';
 import { fetchMaxPriceAction, fetchMinPriceAction } from '../../store/api-actions';
-import { getGuitarTypeFilter, getPriceRangeFilter, getStringCountFilter } from '../../store/catalog-screen/selectors';
+import { getGuitarTypeFilter, getPriceRangeFilter, getStringCountFilter } from '../../store/catalog/selectors';
 import { getMaxPrice, getMinPrice } from '../../store/data-cards/selectors';
 
 function Filter () :JSX.Element {

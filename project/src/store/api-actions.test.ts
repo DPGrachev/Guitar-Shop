@@ -3,10 +3,10 @@ import thunk, {ThunkDispatch} from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createAPI} from '../services/api';
-import {fetchGuitarCardsAction, fetchMaxPriceAction, fetchMinPriceAction, fetchSimilarGuitarCardsAction} from './api-actions';
+import {fetchCurrentGuitarCardAction, fetchGuitarCardsAction, fetchMaxPriceAction, fetchMinPriceAction, fetchSimilarGuitarCardsAction, postNewComment} from './api-actions';
 import {State} from '../types/state';
-import {mockGuitars} from '../utils/mocks';
-import { setCardsTotalCount, setGuitarCards, setMaxPrice, setMinPrice, setSimilarGuitarCards } from './actions';
+import {mockGuitarCard, mockGuitars} from '../utils/mocks';
+import { setCardsTotalCount, setCurrentGuitarCard, setGuitarCards, setMaxPrice, setMinPrice, setSimilarGuitarCards } from './actions';
 
 describe('Async actions', () => {
 
@@ -82,6 +82,49 @@ describe('Async actions', () => {
 
     expect(store.getActions()).toEqual([
       setSimilarGuitarCards(mockGuitars.sort((a,b) => a.name.toLowerCase().indexOf(fakeName.toLowerCase()) - b.name.toLowerCase().indexOf(fakeName.toLowerCase()))),
+    ]);
+  });
+
+  it('should dispatch setCurrentGuitarCard when Get /guitars/1_embed=comments', async () => {
+    const store = mockStore();
+
+    mockAPI
+      .onGet(`/guitars/${mockGuitarCard.id}?_embed=comments`)
+      .reply(200, mockGuitarCard);
+
+    expect(store.getActions()).toEqual([]);
+
+    await store.dispatch(fetchCurrentGuitarCardAction(mockGuitarCard.id));
+
+    expect(store.getActions()).toEqual([
+      setCurrentGuitarCard(mockGuitarCard),
+    ]);
+  });
+
+  it('should dispatch setCurrentGuitarCard when Post /comments', async () => {
+    const store = mockStore();
+    const fakeComment = {
+      userName: 'Саша',
+      advantage: 'Хорошо. Очень хорошо.',
+      disadvantage: 'Плохо. Очень плохо.',
+      comment: 'Неплохо, но дорого.',
+      rating: 3,
+      guitarId: 1,
+    };
+    mockAPI
+      .onPost('/comments',fakeComment)
+      .reply(200);
+
+    mockAPI
+      .onGet(`/guitars/${fakeComment.guitarId}?_embed=comments`)
+      .reply(200, mockGuitarCard);
+
+    expect(store.getActions()).toEqual([]);
+
+    await store.dispatch(postNewComment(fakeComment));
+
+    expect(store.getActions()).toEqual([
+      setCurrentGuitarCard(mockGuitarCard),
     ]);
   });
 });

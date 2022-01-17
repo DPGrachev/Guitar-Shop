@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { catalogScreen } from './catalog-screen/catalog-screen';
+import { catalog } from './catalog/catalog';
 import { dataCards } from './data-cards/data-cards';
 
 const enum NameSpace {
@@ -9,7 +9,7 @@ const enum NameSpace {
 
 const rootReducer = combineReducers({
   [NameSpace.Data]: dataCards,
-  [NameSpace.Catalog]: catalogScreen,
+  [NameSpace.Catalog]: catalog,
 });
 
 type RootState = ReturnType<typeof rootReducer>;

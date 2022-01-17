@@ -74,7 +74,7 @@ function NewCommentPopup ({guitar, onCloseButtonClick} : NewCommentPopupProps): 
             <div className="form-review__wrapper">
               <div className="form-review__name-wrapper">
                 <label className="form-review__label form-review__label--required" htmlFor="user-name">Ваше Имя</label>
-                <input className="form-review__input form-review__input--name" id="user-name" type="text" autoComplete="off" onChange={handleNameInputChange}/>
+                <input className="form-review__input form-review__input--name" id="user-name" data-testid="user-name" type="text" autoComplete="off" onChange={handleNameInputChange}/>
                 {name.length === 0 && <span className="form-review__warning">Заполните поле</span>}
               </div>
               <div><span className="form-review__label form-review__label--required">Ваша Оценка</span>
@@ -83,7 +83,7 @@ function NewCommentPopup ({guitar, onCloseButtonClick} : NewCommentPopupProps): 
                   <label className="rate__label" htmlFor="star-5" title="Отлично"></label>
                   <input className="visually-hidden" type="radio" id="star-4" name="rate" value="4" onClick={handleRatingClick}/>
                   <label className="rate__label" htmlFor="star-4" title="Хорошо"></label>
-                  <input className="visually-hidden" type="radio" id="star-3" name="rate" value="3" onClick={handleRatingClick}/>
+                  <input className="visually-hidden" type="radio" id="star-3" data-testid="star-3" name="rate" value="3" onClick={handleRatingClick}/>
                   <label className="rate__label" htmlFor="star-3" title="Нормально"></label>
                   <input className="visually-hidden" type="radio" id="star-2" name="rate" value="2" onClick={handleRatingClick}/>
                   <label className="rate__label" htmlFor="star-2" title="Плохо"></label>
@@ -94,14 +94,14 @@ function NewCommentPopup ({guitar, onCloseButtonClick} : NewCommentPopupProps): 
               </div>
             </div>
             <label className="form-review__label" htmlFor="user-name">Достоинства</label>
-            <input className="form-review__input" id="pros" type="text" autoComplete="off" ref={advantageField}/>
+            <input className="form-review__input" id="pros" data-testid="advantage" type="text" autoComplete="off" ref={advantageField}/>
             <label className="form-review__label" htmlFor="user-name">Недостатки</label>
-            <input className="form-review__input" id="user-name" type="text" autoComplete="off" ref={disadvantageField}/>
+            <input className="form-review__input" id="user-name" data-testid="disadvantage" type="text" autoComplete="off" ref={disadvantageField}/>
             <label className="form-review__label" htmlFor="user-name">Комментарий</label>
-            <textarea className="form-review__input form-review__input--textarea" id="user-name" rows={10} autoComplete="off" ref={commentField}></textarea>
+            <textarea className="form-review__input form-review__input--textarea" id="user-name" data-testid="comment" rows={10} autoComplete="off" ref={commentField}></textarea>
             <button className="button button--medium-20 form-review__button" type="submit" onClick={handleSendButtonClick}>Отправить отзыв</button>
           </form>
-          <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть" onClick={onCloseButtonClick}><span className="button-cross__icon"></span><span className="modal__close-btn-interactive-area"></span>
+          <button className="modal__close-btn button-cross" type="button" data-testid="close-button" aria-label="Закрыть" onClick={onCloseButtonClick}><span className="button-cross__icon"></span><span className="modal__close-btn-interactive-area"></span>
           </button>
         </div>
       </div>

@@ -1,8 +1,8 @@
 import { GuitarType } from '../../const';
 import { setCurrentPageOptions, setGuitarTypeFilter, setPriceRangeFilter, setSortedOptions, setStringsCountFilter } from '../actions';
-import { catalogScreen } from './catalog-screen';
+import { catalog } from './catalog';
 
-describe('Reducer: catalogScreen', () => {
+describe('Reducer: catalog', () => {
   const state = {
     sortedOptions: '',
     currentPageOptions: '',
@@ -11,13 +11,13 @@ describe('Reducer: catalogScreen', () => {
     priceRangeFilter: [0, 0] as [number, number],
   };
   it('without additional parameters should return initial state', () => {
-    expect(catalogScreen(void 0, {type: 'UNKNOWN_ACTION'}))
+    expect(catalog(void 0, {type: 'UNKNOWN_ACTION'}))
       .toEqual(state);
   });
   it('should update sortedOptions by current options', () => {
 
     const fakeSortedOptions = 'newSort';
-    expect(catalogScreen(state, setSortedOptions(fakeSortedOptions)))
+    expect(catalog(state, setSortedOptions(fakeSortedOptions)))
       .toEqual({
         sortedOptions: fakeSortedOptions,
         currentPageOptions: '',
@@ -30,7 +30,7 @@ describe('Reducer: catalogScreen', () => {
   it('should update currentPageOptions by current page', () => {
 
     const fakeCurrentPageOptions = 'newpage';
-    expect(catalogScreen(state, setCurrentPageOptions(fakeCurrentPageOptions)))
+    expect(catalog(state, setCurrentPageOptions(fakeCurrentPageOptions)))
       .toEqual({
         sortedOptions: '',
         currentPageOptions: fakeCurrentPageOptions,
@@ -43,7 +43,7 @@ describe('Reducer: catalogScreen', () => {
   it('should update guitarTypeFilter by current guitarTypes', () => {
 
     const fakeGuitarTypes = [GuitarType.Electric, GuitarType.Ukulele];
-    expect(catalogScreen(state, setGuitarTypeFilter(fakeGuitarTypes)))
+    expect(catalog(state, setGuitarTypeFilter(fakeGuitarTypes)))
       .toEqual({
         sortedOptions: '',
         currentPageOptions: '',
@@ -56,7 +56,7 @@ describe('Reducer: catalogScreen', () => {
   it('should update stringCountFilter by current stringCounts', () => {
 
     const fakeStringCountFilter = [4,6,7];
-    expect(catalogScreen(state, setStringsCountFilter(fakeStringCountFilter)))
+    expect(catalog(state, setStringsCountFilter(fakeStringCountFilter)))
       .toEqual({
         sortedOptions: '',
         currentPageOptions: '',
@@ -69,7 +69,7 @@ describe('Reducer: catalogScreen', () => {
   it('should update priceRangeFilter by current price range', () => {
 
     const fakePriceRange = [10,100] as [number,number];
-    expect(catalogScreen(state, setPriceRangeFilter(fakePriceRange)))
+    expect(catalog(state, setPriceRangeFilter(fakePriceRange)))
       .toEqual({
         sortedOptions: '',
         currentPageOptions: '',
