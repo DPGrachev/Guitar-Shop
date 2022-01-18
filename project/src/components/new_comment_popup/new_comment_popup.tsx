@@ -16,6 +16,8 @@ function NewCommentPopup ({guitar, onCloseButtonClick} : NewCommentPopupProps): 
   const [name, setName] = useState('');
   const [currentRating, setCurrentRating] = useState(0);
   const [isCommentSent, setIsCommentSent] = useState(false);
+  const [isNameValid, setIsNameValid] = useState(true);
+  const [isRatingValid, setIsRatingValid] = useState(true);
   const dispatch = useDispatch();
 
   const handleRatingClick = (evt: MouseEvent<HTMLInputElement>) => {
@@ -28,7 +30,24 @@ function NewCommentPopup ({guitar, onCloseButtonClick} : NewCommentPopupProps): 
 
   const handleSendButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
-    if(!name || !currentRating){
+
+    if(!name || !currentRating || !disadvantageField.current?.value || !advantageField.current?.value || !commentField.current?.value){
+      if(!name){
+        setIsNameValid(false);
+      }
+      if(!currentRating){
+        setIsRatingValid(false);
+      }
+      if(!commentField.current?.value){
+        commentField.current?.reportValidity();
+      }
+      if(!disadvantageField.current?.value){
+        disadvantageField.current?.reportValidity();
+      }
+      if(!advantageField.current?.value){
+        advantageField.current?.reportValidity();
+      }
+
       return;
     }
     const commentPost: CommentPost = {
@@ -74,8 +93,8 @@ function NewCommentPopup ({guitar, onCloseButtonClick} : NewCommentPopupProps): 
             <div className="form-review__wrapper">
               <div className="form-review__name-wrapper">
                 <label className="form-review__label form-review__label--required" htmlFor="user-name">Ваше Имя</label>
-                <input className="form-review__input form-review__input--name" id="user-name" data-testid="user-name" type="text" autoComplete="off" onChange={handleNameInputChange}/>
-                {name.length === 0 && <span className="form-review__warning">Заполните поле</span>}
+                <input className="form-review__input form-review__input--name" id="user-name" data-testid="user-name" type="text" autoComplete="off" required onChange={handleNameInputChange}/>
+                {!isNameValid && <span className="form-review__warning">Заполните поле</span>}
               </div>
               <div><span className="form-review__label form-review__label--required">Ваша Оценка</span>
                 <div className="rate rate--reverse">
@@ -89,16 +108,16 @@ function NewCommentPopup ({guitar, onCloseButtonClick} : NewCommentPopupProps): 
                   <label className="rate__label" htmlFor="star-2" title="Плохо"></label>
                   <input className="visually-hidden" type="radio" id="star-1" name="rate" value="1" onClick={handleRatingClick}/>
                   <label className="rate__label" htmlFor="star-1" title="Ужасно"></label><span className="rate__count"></span>
-                  {currentRating === 0 && <span className="rate__message">Поставьте оценку</span>}
+                  {!isRatingValid && <span className="rate__message">Поставьте оценку</span>}
                 </div>
               </div>
             </div>
             <label className="form-review__label" htmlFor="user-name">Достоинства</label>
-            <input className="form-review__input" id="pros" data-testid="advantage" type="text" autoComplete="off" ref={advantageField}/>
+            <input className="form-review__input" id="pros" data-testid="advantage" type="text" autoComplete="off" ref={advantageField} required/>
             <label className="form-review__label" htmlFor="user-name">Недостатки</label>
-            <input className="form-review__input" id="user-name" data-testid="disadvantage" type="text" autoComplete="off" ref={disadvantageField}/>
+            <input className="form-review__input" id="user-name" data-testid="disadvantage" type="text" autoComplete="off" ref={disadvantageField} required/>
             <label className="form-review__label" htmlFor="user-name">Комментарий</label>
-            <textarea className="form-review__input form-review__input--textarea" id="user-name" data-testid="comment" rows={10} autoComplete="off" ref={commentField}></textarea>
+            <textarea className="form-review__input form-review__input--textarea" id="user-name" data-testid="comment" rows={10} autoComplete="off" required ref={commentField}></textarea>
             <button className="button button--medium-20 form-review__button" type="submit" onClick={handleSendButtonClick}>Отправить отзыв</button>
           </form>
           <button className="modal__close-btn button-cross" type="button" data-testid="close-button" aria-label="Закрыть" onClick={onCloseButtonClick}><span className="button-cross__icon"></span><span className="modal__close-btn-interactive-area"></span>
