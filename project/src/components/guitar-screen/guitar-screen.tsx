@@ -15,6 +15,8 @@ import NewCommentPopup from '../new_comment_popup/new_comment_popup';
 import { Guitar } from '../../types/guitar';
 import FocusLock from 'react-focus-lock';
 import {RemoveScroll} from 'react-remove-scroll';
+import { formatePrice } from '../../utils/utils';
+import AddInCartPopup from '../add-in-cart-popup/add-in-cart-popup';
 
 type Params = {
   id: string,
@@ -34,12 +36,13 @@ function GuitarScreen ():JSX.Element {
   const [currentTab, setCurrentTab] = useState(Tabs.characteristics);
   const [openedCommentsCurrent, setOpenedCommentsCurrent] = useState(COMMENTS_STEP);
   const [isNewCommentForm, setIsNewCommentForm] = useState(false);
+  const [isAddInCartForm, setIsAddInCartForm] = useState(false);
   const comments = currentGuitarCard?.comments.slice().sort((a,b) => dayjs(b.createAt).diff(dayjs(a.createAt)));
 
   useEffect(() => {
-    if(isNewCommentForm){
+    if(isNewCommentForm || isAddInCartForm){
       window.addEventListener('keydown', handleEscKeydown);
-      return function cleanup() {
+      return function () {
         window.removeEventListener('keydown', handleEscKeydown);
       };
     }
@@ -60,6 +63,7 @@ function GuitarScreen ():JSX.Element {
   const handleEscKeydown = (evt: KeyboardEvent) => {
     if(evt.key === 'Escape'){
       setIsNewCommentForm(false);
+      setIsAddInCartForm(false);
     }
   };
 
@@ -83,6 +87,15 @@ function GuitarScreen ():JSX.Element {
     setIsNewCommentForm(false);
   };
 
+  const closeAddInCartForm = () => {
+    setIsAddInCartForm(false);
+  };
+
+  const handleAddInCartButtonClick = (evt: MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    setIsAddInCartForm(true);
+  };
+
   return (
     <>
       <Header />
@@ -91,6 +104,12 @@ function GuitarScreen ():JSX.Element {
           <FocusLock>
             <RemoveScroll>
               <NewCommentPopup guitar={currentGuitarCard as Guitar} onCloseButtonClick={closeNewCommentForm}/>
+            </RemoveScroll>
+          </FocusLock>}
+        {isAddInCartForm &&
+          <FocusLock>
+            <RemoveScroll>
+              <AddInCartPopup guitar={currentGuitarCard as Guitar} onCloseButtonClick={closeAddInCartForm}/>
             </RemoveScroll>
           </FocusLock>}
         <div className="container">
@@ -141,7 +160,7 @@ function GuitarScreen ():JSX.Element {
                 </div>
                 <div className="product-container__price-wrapper">
                   <p className="product-container__price-info product-container__price-info--title">Цена:</p>
-                  <p className="product-container__price-info product-container__price-info--value">{new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'RUB', maximumFractionDigits: 0, minimumFractionDigits: 0}).format(currentGuitarCard.price)}</p><a className="button button--red button--big product-container__button" href="/">Добавить в корзину</a>
+                  <p className="product-container__price-info product-container__price-info--value">{formatePrice(currentGuitarCard.price)}</p><a className="button button--red button--big product-container__button" href="/" onClick={handleAddInCartButtonClick}>Добавить в корзину</a>
                 </div>
               </div>
               <section className="reviews">

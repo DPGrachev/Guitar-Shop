@@ -21,4 +21,13 @@ type CatalogScreen = {
   priceRangeFilter: [number, number],
 }
 
-export type {State, DataCards, CatalogScreen};
+type Cart = {
+  // guitarsInCart: Map<number, Guitar>,
+  // numberOfGuitarsInCurt: Map<number,number>,
+  guitarsInCart: Guitar[],
+  numberOfGuitarsInCurt: {
+    [key: number]: number,
+  },
+}
+
+export type {State, DataCards, CatalogScreen, Cart};

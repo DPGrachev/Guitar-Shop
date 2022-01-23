@@ -4,6 +4,7 @@ import { AppRoute } from '../../const';
 import CatalogScreen from '../catalog-screen/catalog-screen';
 import GuitarScreen from '../guitar-screen/guitar-screen';
 import MainScreen from '../main-screen/main-screen';
+import Cart from '../cart/cart';
 
 function App(): JSX.Element {
   return (
@@ -16,6 +17,9 @@ function App(): JSX.Element {
       </Route>
       <Route exact path={AppRoute.GuitarScreen}>
         <GuitarScreen />
+      </Route>
+      <Route exact path={AppRoute.Cart}>
+        <Cart />
       </Route>
       <Route>
         <NotFoundScreen />

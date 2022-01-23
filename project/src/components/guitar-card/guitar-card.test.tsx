@@ -10,7 +10,7 @@ describe('Component: GuitarCard', () => {
     const history = createMemoryHistory();
     render(
       <Router history={history}>
-        <GuitarCard guitar={mockGuitarCard}/>
+        <GuitarCard guitar={mockGuitarCard} onAddInCartButtonClick={jest.fn()}/>
       </Router>,
     );
 

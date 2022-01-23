@@ -1,12 +1,23 @@
+import { MouseEvent } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { getGuitarsinCurt } from '../../store/cart/selectors';
 import { Guitar } from '../../types/guitar';
 import RatingStars from '../rating-stars/rating-stars';
 
 type GuitarCardProps = {
   guitar: Guitar,
+  onAddInCartButtonClick: ( guitar :Guitar) => void;
 }
 
-function GuitarCard ({guitar} : GuitarCardProps) :JSX.Element {
+function GuitarCard ({guitar, onAddInCartButtonClick} : GuitarCardProps) :JSX.Element {
+  const guitarsInCart = useSelector(getGuitarsinCurt);
+
+  const handleAddInCartButtonClick = (evt: MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    onAddInCartButtonClick(guitar);
+  };
 
   return (
     <div className="product-card"><img src={`../${guitar.previewImg}`} width="75" height="190" alt={guitar.name}/>
@@ -19,7 +30,12 @@ function GuitarCard ({guitar} : GuitarCardProps) :JSX.Element {
         <p className="product-card__price"><span className="visually-hidden">Цена:</span>{`${guitar.price} ₽`}
         </p>
       </div>
-      <div className="product-card__buttons"><Link className="button button--mini" to={`/guitars/${guitar.id}`}>Подробнее</Link><a className="button button--red button--mini button--add-to-cart" href="/">Купить</a>
+      <div className="product-card__buttons"><Link className="button button--mini" to={`/guitars/${guitar.id}`}>Подробнее</Link>
+        {
+          guitarsInCart.find((guitarInCart) => guitarInCart.id === guitar.id)
+            ? <Link className="button button--red-border button--mini button--in-cart" to={AppRoute.Cart}>В Корзине</Link>
+            : <a className="button button--red button--mini button--add-to-cart" href="/" onClick={handleAddInCartButtonClick}>Купить</a>
+        }
       </div>
     </div>
   );

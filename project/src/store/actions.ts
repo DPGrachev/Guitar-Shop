@@ -101,6 +101,34 @@ const setPriceRangeFilter = createAction(
   }),
 );
 
+const setGuitarInCart = createAction(
+  ActionType.SetGuitarInCart,
+  (guitar: Guitar) => ({
+    payload: {
+      gutarInCart: guitar,
+    },
+  }),
+);
+
+const setNumberOfGuitarInCurt = createAction(
+  ActionType.SetNumberOfGuitarInCurt,
+  (guitarID: number, quantity: number) => ({
+    payload: {
+      guitarID: guitarID,
+      quantity: quantity,
+    },
+  }),
+);
+
+const removeGuitarInCart = createAction(
+  ActionType.RemoveGuitarInCart,
+  (guitar: Guitar) => ({
+    payload: {
+      gutarInCart: guitar,
+    },
+  }),
+);
+
 export {
   setGuitarCards,
   setCurrentGuitarCard,
@@ -112,5 +140,8 @@ export {
   setCurrentPageOptions,
   setGuitarTypeFilter,
   setStringsCountFilter,
-  setPriceRangeFilter
+  setPriceRangeFilter,
+  setGuitarInCart,
+  setNumberOfGuitarInCurt,
+  removeGuitarInCart
 };

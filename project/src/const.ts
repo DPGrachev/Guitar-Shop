@@ -1,6 +1,7 @@
 const enum AppRoute {
   Main = '/',
   Catalog = '/catalog/page_:number',
+  Cart = '/cart',
   FirstCatalogPage = '/catalog/page_1',
   GuitarScreen = '/guitars/:id',
   NotFoundScreen = '404',
@@ -19,6 +20,9 @@ const enum ActionType {
   SetPriceRangeFilter = 'catalog-screen/set-price-range-filter',
   SetFiltesOptions = 'catalog-screen/set-filters-options',
   SetCurrentPageOptions = 'catalog-screen/set-current-page-options',
+  SetGuitarInCart = 'cart/set-guitar-in-cart',
+  SetNumberOfGuitarInCurt = 'cart/set-number-of-guitar-in-curt',
+  RemoveGuitarInCart = 'cart/remove-guitar-in-cart',
 }
 
 enum SortOption {
@@ -51,4 +55,25 @@ const stringsInGuitarType = {
   [GuitarType.Acoustic] : [6,7,12],
 };
 
-export {AppRoute, ActionType, SortOption, RankingOption, GuitarType, GuitarTypeTranslate, stringsInGuitarType};
+const promoCode = [
+  {
+    name: 'light-333',
+    discont: 10,
+  },
+  {
+    name: 'medium-444',
+    discont: 15,
+  },
+  {
+    name: 'height-555',
+    discont: 20,
+  },
+];
+
+enum PromoCodeStatus {
+  Succes = 'succes',
+  Failed = 'failed',
+  Default = 'default'
+}
+
+export {AppRoute, ActionType, SortOption, RankingOption, GuitarType, GuitarTypeTranslate, stringsInGuitarType, promoCode, PromoCodeStatus};
