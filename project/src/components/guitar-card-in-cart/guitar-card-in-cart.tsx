@@ -53,7 +53,7 @@ function GuirarCardInCart ({guitar, onDeleteFromCartButtonClick}: GuirarCardInCa
 
   return (
     <div className="cart-item">
-      <button className="cart-item__close-button button-cross" type="button" aria-label="Удалить" onClick={handleDeleteButtonClick}>
+      <button className="cart-item__close-button button-cross" type="button" aria-label="Удалить" data-testid='deleteButton' onClick={handleDeleteButtonClick}>
         <span className="button-cross__icon"></span>
         <span className="cart-item__close-button-interactive-area"></span>
       </button>
@@ -66,13 +66,13 @@ function GuirarCardInCart ({guitar, onDeleteFromCartButtonClick}: GuirarCardInCa
       </div>
       <div className="cart-item__price">{formatePrice(guitar.price)}</div>
       <div className="quantity cart-item__quantity">
-        <button className="quantity__button" aria-label="Уменьшить количество" onClick={handleDecrementButtonClick}>
+        <button className="quantity__button" aria-label="Уменьшить количество" data-testid='decBtn' onClick={handleDecrementButtonClick}>
           <svg width="8" height="8" aria-hidden="true">
             <use xlinkHref="#icon-minus"></use>
           </svg>
         </button>
-        <input ref={quantityField} className="quantity__input" type="number" placeholder="1" id="2-count" name="2-count" max="99" defaultValue={numberInCart} onChange={handleQuantityChange}/>
-        <button className="quantity__button" aria-label="Увеличить количество" onClick={handleIncrementButtonClick}>
+        <input ref={quantityField} data-testid='quantityField' className="quantity__input" type="number" placeholder="1" id="2-count" name="2-count" max="99" defaultValue={numberInCart} onChange={handleQuantityChange}/>
+        <button className="quantity__button" aria-label="Увеличить количество" data-testid='incBtn' onClick={handleIncrementButtonClick}>
           <svg width="8" height="8" aria-hidden="true">
             <use xlinkHref="#icon-plus"></use>
           </svg>

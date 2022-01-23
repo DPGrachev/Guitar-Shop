@@ -38,6 +38,10 @@ describe('Application Routing', () => {
       stringCountFilter: [],
       priceRangeFilter: [0,0],
     },
+    CART: {
+      guitarsInCart: [],
+      numberOfGuitarsInCurt: {},
+    },
   });
 
   const fakeApp = (
@@ -55,7 +59,7 @@ describe('Application Routing', () => {
   });
 
   it('should render "CatalogScreen" when user navigate to "/catalog/page_:number"', () => {
-    history.push('/catalog/page_1');
+    history.push(AppRoute.FirstCatalogPage);
     render(fakeApp);
 
     expect(screen.getByText(/Каталог гитар/i)).toBeInTheDocument();
@@ -76,6 +80,14 @@ describe('Application Routing', () => {
 
     expect(screen.getByText(/Такой страницы не существует/i)).toBeInTheDocument();
     expect(screen.getByText(/Вернуться на главную/i)).toBeInTheDocument();
+  });
+
+  it('should render "Cart" when user navigate to "/cart"', () => {
+    history.push(AppRoute.Cart);
+    render(fakeApp);
+
+    expect(screen.getByText(/Корзина пуста/i)).toBeInTheDocument();
+    expect(screen.getByText(/Промокод на скидку/i)).toBeInTheDocument();
   });
 
 });

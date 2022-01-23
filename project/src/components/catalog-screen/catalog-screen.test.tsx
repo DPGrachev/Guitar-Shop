@@ -43,6 +43,10 @@ describe('Component: CatalogScreen', () => {
         stringCountFilter: [],
         priceRangeFilter: [0,0],
       },
+      CART: {
+        guitarsInCart: [],
+        numberOfGuitarsInCurt: {},
+      },
     });
 
     render(
@@ -72,6 +76,10 @@ describe('Component: CatalogScreen', () => {
         guitarTypeFilter: [],
         stringCountFilter: [],
         priceRangeFilter: [0,0],
+      },
+      CART: {
+        guitarsInCart: [],
+        numberOfGuitarsInCurt: {},
       },
     });
     render(

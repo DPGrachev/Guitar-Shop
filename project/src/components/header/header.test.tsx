@@ -10,7 +10,13 @@ const mockStore = configureMockStore();
 
 describe('Component: Header', () => {
   const store= mockStore({
-    DATA: {similarGuitarCards : mockGuitars},
+    DATA: {
+      similarGuitarCards : mockGuitars,
+    },
+    CART: {
+      guitarsInCart: [],
+      numberOfGuitarsInCurt: {},
+    },
   });
   it('should render correctly', () => {
     const history = createMemoryHistory();

@@ -13,12 +13,6 @@ import userEvent from '@testing-library/user-event';
 import { CommentPost } from '../../types/comment';
 
 const history = createMemoryHistory();
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useParams: () => ({
-    id: '1',
-  }),
-}));
 
 describe('Component: NewCommentPopup', () => {
   const api = createAPI();

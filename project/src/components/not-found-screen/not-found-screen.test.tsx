@@ -9,7 +9,13 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 describe('Component: NotFoundScreen', () => {
   const mockStore = configureMockStore();
   const store= mockStore({
-    DATA: {similarGuitarCards : []},
+    DATA: {
+      similarGuitarCards : [],
+    },
+    CART: {
+      guitarsInCart: [],
+      numberOfGuitarsInCurt: {},
+    },
   });
   it('should render correctly', () => {
     const history = createMemoryHistory();

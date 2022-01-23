@@ -34,6 +34,10 @@ describe('Component: GuitarScreen', () => {
         currentGuitarCard: mockGuitarCard,
         similarGuitarCards : [],
       },
+      CART: {
+        guitarsInCart: [],
+        numberOfGuitarsInCurt: {},
+      },
     });
 
     render(
@@ -57,6 +61,10 @@ describe('Component: GuitarScreen', () => {
         currentGuitarCard: mockGuitarWithComment,
         similarGuitarCards : [],
       },
+      CART: {
+        guitarsInCart: [],
+        numberOfGuitarsInCurt: {},
+      },
     });
 
     render(
@@ -79,6 +87,10 @@ describe('Component: GuitarScreen', () => {
       DATA: {
         currentGuitarCard: mockGuitarWithComment,
         similarGuitarCards : [],
+      },
+      CART: {
+        guitarsInCart: [],
+        numberOfGuitarsInCurt: {},
       },
     });
 
@@ -104,6 +116,10 @@ describe('Component: GuitarScreen', () => {
         currentGuitarCard: mockGuitarWithComment,
         similarGuitarCards : [],
       },
+      CART: {
+        guitarsInCart: [],
+        numberOfGuitarsInCurt: {},
+      },
     });
 
     render(
@@ -122,6 +138,32 @@ describe('Component: GuitarScreen', () => {
     expect(screen.getByText(/Ваша Оценка/i)).toBeInTheDocument();
     expect(screen.getByText(/Ваше Имя/i)).toBeInTheDocument();
     expect(screen.getByText(/Отправить отзыв/i)).toBeInTheDocument();
+  });
+
+  it('when user click on add in cart button should open popup', () => {
+    const store= mockStore({
+      DATA: {
+        currentGuitarCard: mockGuitarWithComment,
+        similarGuitarCards : [],
+      },
+      CART: {
+        guitarsInCart: [],
+        numberOfGuitarsInCurt: {},
+      },
+    });
+
+    render(
+      <Provider store={store}>
+        <Router history={history}>
+          <GuitarScreen />
+        </Router>
+      </Provider>,
+    );
+
+    expect(screen.queryByText(/Добавить товар в корзину/i)).not.toBeInTheDocument();
+
+    userEvent.click(screen.getByText(/Добавить в корзину/i));
+    expect(screen.getByText(/Добавить товар в корзину/i)).toBeInTheDocument();
   });
 
 });

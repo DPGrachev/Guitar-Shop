@@ -70,7 +70,7 @@ function AddInCartPopup ({guitar, onCloseButtonClick, isCatalogScreen} : AddInCa
           <div className="modal__button-container">
             <button className="button button--red button--big modal__button modal__button--add" onClick={handleAddInCartButtonClick}>Добавить в корзину</button>
           </div>
-          <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть" onClick={onCloseButtonClick}><span className="button-cross__icon"></span><span className="modal__close-btn-interactive-area"></span>
+          <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть" data-testid='close-button' onClick={onCloseButtonClick}><span className="button-cross__icon"></span><span className="modal__close-btn-interactive-area"></span>
           </button>
         </div>
       </div>

@@ -1,20 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import {createMemoryHistory} from 'history';
-import MainScreen from './main-screen';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { mockGuitars } from '../../utils/mocks';
 import { Provider } from 'react-redux';
+import Cart from './cart';
 
-describe('Component: MainScreen', () => {
+describe('Component: Cart', () => {
   const mockStore = configureMockStore();
   const store= mockStore({
     DATA: {
       similarGuitarCards : mockGuitars,
     },
     CART: {
-      guitarsInCart: [],
-      numberOfGuitarsInCurt: {},
+      guitarsInCart: [mockGuitars],
+      numberOfGuitarsInCurt: {'1': 2},
     },
   });
   it('should render correctly', () => {
@@ -22,11 +22,15 @@ describe('Component: MainScreen', () => {
     render(
       <Provider store={store}>
         <Router history={history}>
-          <MainScreen />
+          <Cart />
         </Router>,
       </Provider>,
     );
 
-    expect(screen.getByText(/Главная страница/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Корзина/i).length).toBe(2);
+    expect(screen.getByText(/Честер Bass/i)).toBeInTheDocument();
+    expect(screen.getByText(/Промокод на скидку/i)).toBeInTheDocument();
+    expect(screen.getByText(/Оформить заказ/i)).toBeInTheDocument();
+
   });
 });

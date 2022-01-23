@@ -19,7 +19,7 @@ function Search (): JSX.Element {
     history.push(`/guitars/${id}`);
   };
 
-  const HandleEnterKeyDown = (evt: KeyboardEvent<HTMLLIElement>, id: number) => {
+  const handleEnterKeyDown = (evt: KeyboardEvent<HTMLLIElement>, id: number) => {
     if(evt.key === 'Enter'){
       history.push(`/guitars/${id}`);
     }
@@ -37,7 +37,7 @@ function Search (): JSX.Element {
         <label className="visually-hidden" htmlFor="search">Поиск</label>
       </form>
       <ul className={`form-search__select-list ${similarGuitars.length && searchText.length ? '' : 'hidden'}`} style={{zIndex: 1}}>
-        {similarGuitars.map((guitar) => <li key={guitar.id} className="form-search__select-item" tabIndex={0} onClick={() => handleSuitableGuitarClick(guitar.id)} onKeyDown={(evt) => HandleEnterKeyDown(evt, guitar.id)}>{guitar.name}</li>)}
+        {similarGuitars.map((guitar) => <li key={guitar.id} className="form-search__select-item" tabIndex={0} onClick={() => handleSuitableGuitarClick(guitar.id)} onKeyDown={(evt) => handleEnterKeyDown(evt, guitar.id)}>{guitar.name}</li>)}
       </ul>
     </div>
   );

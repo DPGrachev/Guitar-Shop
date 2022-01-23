@@ -35,7 +35,7 @@ function DeleteFromCartPopup ({guitar, onCloseButtonClick} : DeleteFromCartPopup
             <button className="button button--small modal__button" onClick={handleDeleteButtonClick}>Удалить товар</button>
             <button className="button button--black-border button--small modal__button modal__button--right" onClick={onCloseButtonClick}>Продолжить покупки</button>
           </div>
-          <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть" onClick={onCloseButtonClick}><span className="button-cross__icon"></span><span className="modal__close-btn-interactive-area"></span>
+          <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть" data-testid="close-button" onClick={onCloseButtonClick}><span className="button-cross__icon"></span><span className="modal__close-btn-interactive-area"></span>
           </button>
         </div>
       </div>

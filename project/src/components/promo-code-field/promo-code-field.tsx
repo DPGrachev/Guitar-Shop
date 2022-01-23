@@ -29,11 +29,11 @@ function PromoCodeField ({onSetPromocodeClick} : PromoCodeFieldProps): JSX.Eleme
       <form className="coupon__form" id="coupon-form" method="post" action="/">
         <div className="form-input coupon__input">
           <label className="visually-hidden">Промокод</label>
-          <input ref={codeInputField} type="text" placeholder="Введите промокод" id="coupon" name="coupon"/>
+          <input ref={codeInputField} type="text" placeholder="Введите промокод" id="coupon" name="coupon" data-testid='codeInputField'/>
           {status === PromoCodeStatus.Succes && <p className="form-input__message form-input__message--success">Промокод принят</p>}
           {status === PromoCodeStatus.Failed &&<p className="form-input__message form-input__message--error">неверный промокод</p>}
         </div>
-        <button className="button button--big coupon__button" onClick={handleConfrimButtonClick}>Применить</button>
+        <button className="button button--big coupon__button" onClick={handleConfrimButtonClick} data-testid='confrimButton'>Применить</button>
       </form>
     </div>
   );
