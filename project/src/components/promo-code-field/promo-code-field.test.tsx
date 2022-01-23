@@ -2,17 +2,38 @@ import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import PromoCodeField from './promo-code-field';
-import userEvent from '@testing-library/user-event';
+import { createAPI } from '../../services/api';
+import thunk, {ThunkDispatch} from 'redux-thunk';
+import { configureMockStore } from '@jedmao/redux-mock-store';
+import { State } from '../../types/state';
+import {Action} from 'redux';
+import { PromoCodeStatus } from '../../const';
+import { Provider } from 'react-redux';
 
 describe('Component: PromoCodeField', () => {
+  const api = createAPI();
+  const middlewares = [thunk.withExtraArgument(api)];
 
-  const fakeOnSetPromocodeClick = jest.fn();
+  const mockStore = configureMockStore<
+      State,
+      Action,
+      ThunkDispatch<State, typeof api, Action>
+    >(middlewares);
+
+
   it('should render correctly', () => {
     const history = createMemoryHistory();
+    const store= mockStore({
+      CART: {
+        promoCodeStatus: PromoCodeStatus.Default,
+      },
+    });
     render(
-      <Router history={history}>
-        <PromoCodeField onSetPromocodeClick={fakeOnSetPromocodeClick}/>
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <PromoCodeField />
+        </Router>
+      </Provider>,
     );
 
     expect(screen.getByText(/Применить/i)).toBeInTheDocument();
@@ -20,34 +41,41 @@ describe('Component: PromoCodeField', () => {
     expect(screen.getByText(/Введите свой промокод, если он у вас есть./i)).toBeInTheDocument();
   });
 
-  it('when user pusn invalid promo code, should render failed message', () => {
+  it('when promo code status Failed, should render failed message', () => {
     const history = createMemoryHistory();
-    const FAKE_PROMOCODE = 'ascaeave';
+    const store= mockStore({
+      CART: {
+        promoCodeStatus: PromoCodeStatus.Failed,
+      },
+    });
+
     render(
-      <Router history={history}>
-        <PromoCodeField onSetPromocodeClick={fakeOnSetPromocodeClick}/>
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <PromoCodeField />
+        </Router>
+      </Provider>,
     );
 
-    expect(screen.queryByText(/неверный промокод/i)).not.toBeInTheDocument();
-    userEvent.paste(screen.getByTestId('codeInputField'), FAKE_PROMOCODE);
-    userEvent.click(screen.getByTestId('confrimButton'));
     expect(screen.getByText(/неверный промокод/i)).toBeInTheDocument();
   });
 
-  it('when user pusn valid promo code, should render succes message and onSetPromocodeClick be called', () => {
+  it('when promo code status Succes, should render succes message', () => {
     const history = createMemoryHistory();
-    const PROMOCODE = 'light-333';
+    const store= mockStore({
+      CART: {
+        promoCodeStatus: PromoCodeStatus.Succes,
+      },
+    });
+
     render(
-      <Router history={history}>
-        <PromoCodeField onSetPromocodeClick={fakeOnSetPromocodeClick}/>
-      </Router>,
+      <Provider store={store}>
+        <Router history={history}>
+          <PromoCodeField />
+        </Router>
+      </Provider>,
     );
 
-    expect(screen.queryByText(/Промокод принят/i)).not.toBeInTheDocument();
-    userEvent.paste(screen.getByTestId('codeInputField'), PROMOCODE);
-    userEvent.click(screen.getByTestId('confrimButton'));
     expect(screen.getByText(/Промокод принят/i)).toBeInTheDocument();
-    expect(fakeOnSetPromocodeClick).toBeCalled();
   });
 });

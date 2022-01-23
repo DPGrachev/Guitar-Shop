@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { getGuitarsinCurt, getNumberOfGuitarsInCurt } from '../../store/cart/selectors';
+import { getDiscont, getGuitarsinCurt, getNumberOfGuitarsInCurt } from '../../store/cart/selectors';
 import { Guitar } from '../../types/guitar';
 import Footer from '../footer/footer';
 import GuirarCardInCart from '../guitar-card-in-cart/guitar-card-in-cart';
@@ -16,9 +16,9 @@ import PromoCodeField from '../promo-code-field/promo-code-field';
 function Cart (): JSX.Element {
   const guitarsInCart = useSelector(getGuitarsinCurt);
   const numberOfGuitarsInCurt = useSelector(getNumberOfGuitarsInCurt);
+  const discont = useSelector(getDiscont);
   const [removableGuitar, setRemovableGuitar] = useState<Guitar | null>(null);
   const [isDeleteFromCartForm, setIsDeleteFromCartForm] = useState(false);
-  const [discont, setDiscont] = useState(0);
   const totalQuantity = guitarsInCart.reduce((acc,guitar) => acc + guitar.price * numberOfGuitarsInCurt[guitar.id], 0);
   const totalDiscont = totalQuantity * discont / 100;
 
@@ -70,7 +70,7 @@ function Cart (): JSX.Element {
             {guitarsInCart.length === 0 && <h1>Корзина пуста</h1>}
             {guitarsInCart.map((guitar) => <GuirarCardInCart key={guitar.id} guitar={guitar} onDeleteFromCartButtonClick={openDeleteFromCartForm}/>)}
             <div className="cart__footer">
-              <PromoCodeField onSetPromocodeClick={setDiscont}/>
+              <PromoCodeField />
               <div className="cart__total-info">
                 <p className="cart__total-item"><span className="cart__total-value-name">Всего:</span><span className="cart__total-value">{formatePrice(totalQuantity)}</span></p>
                 <p className="cart__total-item"><span className="cart__total-value-name">Скидка:</span><span className={`cart__total-value ${totalDiscont ? 'cart__total-value--bonus' : ''}`}>{totalDiscont ? `- ${formatePrice(totalDiscont)}` : '0 ₽'}</span></p>

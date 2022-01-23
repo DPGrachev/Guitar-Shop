@@ -1,6 +1,6 @@
 import { Guitar } from './guitar';
 import {RootState} from '../store/root-reducer';
-import { GuitarType } from '../const';
+import { GuitarType, PromoCodeStatus } from '../const';
 
 type State = RootState;
 
@@ -22,12 +22,12 @@ type CatalogScreen = {
 }
 
 type Cart = {
-  // guitarsInCart: Map<number, Guitar>,
-  // numberOfGuitarsInCurt: Map<number,number>,
   guitarsInCart: Guitar[],
   numberOfGuitarsInCurt: {
     [key: number]: number,
   },
+  discont: number,
+  promoCodeStatus: PromoCodeStatus,
 }
 
 export type {State, DataCards, CatalogScreen, Cart};

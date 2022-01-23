@@ -3,10 +3,11 @@ import thunk, {ThunkDispatch} from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import {createAPI} from '../services/api';
-import {fetchCurrentGuitarCardAction, fetchGuitarCardsAction, fetchMaxPriceAction, fetchMinPriceAction, fetchSimilarGuitarCardsAction, postNewComment} from './api-actions';
+import {fetchCurrentGuitarCardAction, fetchGuitarCardsAction, fetchMaxPriceAction, fetchMinPriceAction, fetchSimilarGuitarCardsAction, postCoupon, postNewComment} from './api-actions';
 import {State} from '../types/state';
 import {mockGuitarCard, mockGuitars} from '../utils/mocks';
-import { setCardsTotalCount, setCurrentGuitarCard, setGuitarCards, setMaxPrice, setMinPrice, setSimilarGuitarCards } from './actions';
+import { setCardsTotalCount, setCurrentGuitarCard, setDiscont, setGuitarCards, setMaxPrice, setMinPrice, setPromoCodeStatus, setSimilarGuitarCards } from './actions';
+import { PromoCodeStatus } from '../const';
 
 describe('Async actions', () => {
 
@@ -125,6 +126,24 @@ describe('Async actions', () => {
 
     expect(store.getActions()).toEqual([
       setCurrentGuitarCard(mockGuitarCard),
+    ]);
+  });
+
+  it('should dispatch setDiscont and setPromoCodeStatus when POST /coupons', async () => {
+    const store = mockStore();
+    const fakeCoupon = {coupon: 'asdaf'};
+    const fakeDiscont = 20;
+    mockAPI
+      .onPost('/coupons')
+      .reply(200, fakeDiscont);
+
+    expect(store.getActions()).toEqual([]);
+
+    await store.dispatch(postCoupon(fakeCoupon));
+
+    expect(store.getActions()).toEqual([
+      setDiscont(fakeDiscont),
+      setPromoCodeStatus(PromoCodeStatus.Succes),
     ]);
   });
 });

@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { ActionType, GuitarType } from '../const';
+import { ActionType, GuitarType, PromoCodeStatus } from '../const';
 import { Guitar } from '../types/guitar';
 
 const setGuitarCards = createAction(
@@ -129,6 +129,24 @@ const removeGuitarInCart = createAction(
   }),
 );
 
+const setDiscont = createAction(
+  ActionType.SetDiscont,
+  (discont: number) => ({
+    payload: {
+      discont: discont,
+    },
+  }),
+);
+
+const setPromoCodeStatus = createAction(
+  ActionType.SetPromoCodeStatus,
+  (status: PromoCodeStatus) => ({
+    payload: {
+      status: status,
+    },
+  }),
+);
+
 export {
   setGuitarCards,
   setCurrentGuitarCard,
@@ -143,5 +161,7 @@ export {
   setPriceRangeFilter,
   setGuitarInCart,
   setNumberOfGuitarInCurt,
-  removeGuitarInCart
+  removeGuitarInCart,
+  setDiscont,
+  setPromoCodeStatus
 };

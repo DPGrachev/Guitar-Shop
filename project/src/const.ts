@@ -23,6 +23,8 @@ const enum ActionType {
   SetGuitarInCart = 'cart/set-guitar-in-cart',
   SetNumberOfGuitarInCurt = 'cart/set-number-of-guitar-in-curt',
   RemoveGuitarInCart = 'cart/remove-guitar-in-cart',
+  SetDiscont = 'cart/set-discont',
+  SetPromoCodeStatus = 'cart/set-promo-code-status',
 }
 
 enum SortOption {
@@ -55,25 +57,10 @@ const stringsInGuitarType = {
   [GuitarType.Acoustic] : [6,7,12],
 };
 
-const promoCode = [
-  {
-    name: 'light-333',
-    discont: 10,
-  },
-  {
-    name: 'medium-444',
-    discont: 15,
-  },
-  {
-    name: 'height-555',
-    discont: 20,
-  },
-];
-
 enum PromoCodeStatus {
   Succes = 'succes',
   Failed = 'failed',
   Default = 'default'
 }
 
-export {AppRoute, ActionType, SortOption, RankingOption, GuitarType, GuitarTypeTranslate, stringsInGuitarType, promoCode, PromoCodeStatus};
+export {AppRoute, ActionType, SortOption, RankingOption, GuitarType, GuitarTypeTranslate, stringsInGuitarType, PromoCodeStatus};

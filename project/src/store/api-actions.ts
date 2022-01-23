@@ -1,8 +1,10 @@
 import { ThunkActionResult } from '../types/actions';
 import { Guitar } from '../types/guitar';
-import { setCardsTotalCount, setCurrentGuitarCard, setGuitarCards, setMaxPrice, setMinPrice, setSimilarGuitarCards } from './actions';
+import { setCardsTotalCount, setCurrentGuitarCard, setDiscont, setGuitarCards, setMaxPrice, setMinPrice, setPromoCodeStatus, setSimilarGuitarCards } from './actions';
 import { toast } from 'react-toastify';
 import { CommentPost } from '../types/comment';
+import { CouponPost } from '../types/coupon';
+import { PromoCodeStatus } from '../const';
 
 const fetchGuitarCardsAction = (params: string, sortedOptions: string, currentPageOptions: string) : ThunkActionResult =>
   async (dispatch, _getState, api): Promise<void> => {
@@ -60,11 +62,25 @@ const postNewComment = (comment: CommentPost) : ThunkActionResult =>
     }
   };
 
+const postCoupon = (coupon: CouponPost) : ThunkActionResult =>
+  async (dispatch, _getState, api): Promise<void> => {
+    try{
+      await api.post('/coupons', coupon)
+        .then((response) => {
+          dispatch(setDiscont(Number(response.data)));
+          dispatch(setPromoCodeStatus(PromoCodeStatus.Succes));
+        });
+    }catch{
+      dispatch(setPromoCodeStatus(PromoCodeStatus.Failed));
+    }
+  };
+
 export {
   fetchGuitarCardsAction,
   fetchCurrentGuitarCardAction,
   fetchMaxPriceAction,
   fetchMinPriceAction,
   fetchSimilarGuitarCardsAction,
-  postNewComment
+  postNewComment,
+  postCoupon
 };

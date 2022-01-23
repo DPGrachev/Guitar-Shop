@@ -1,24 +1,18 @@
-import { MouseEvent, useRef, useState } from 'react';
-import { promoCode, PromoCodeStatus } from '../../const';
+import { MouseEvent, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { PromoCodeStatus } from '../../const';
+import { postCoupon } from '../../store/api-actions';
+import { getPromoCodeStatus } from '../../store/cart/selectors';
 
-type PromoCodeFieldProps = {
-  onSetPromocodeClick: (discont: number) => void,
-}
-
-function PromoCodeField ({onSetPromocodeClick} : PromoCodeFieldProps): JSX.Element {
+function PromoCodeField (): JSX.Element {
   const codeInputField = useRef<HTMLInputElement>(null);
-  const [status, setStatus] = useState(PromoCodeStatus.Default);
+  const status = useSelector(getPromoCodeStatus);
+  const dispatch = useDispatch();
 
   const handleConfrimButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
     if(codeInputField.current?.value){
-      const promo = promoCode.find((code) => code.name === codeInputField.current?.value);
-      if(promo){
-        onSetPromocodeClick(promo.discont);
-        setStatus(PromoCodeStatus.Succes);
-      }else{
-        setStatus(PromoCodeStatus.Failed);
-      }
+      dispatch(postCoupon({coupon: codeInputField.current.value}));
     }
   };
 
