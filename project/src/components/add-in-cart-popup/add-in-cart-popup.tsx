@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { AppRoute, GuitarTypeTranslate } from '../../const';
 import { setGuitarInCart, setNumberOfGuitarInCurt } from '../../store/actions';
 import { getGuitarsinCurt, getNumberOfGuitarsInCurt } from '../../store/cart/selectors';
@@ -31,6 +31,7 @@ function AddInCartPopup ({guitar, onCloseButtonClick, isCatalogScreen} : AddInCa
   };
 
   const handleContinueShoppingButtonClick = () => isCatalogScreen ? onCloseButtonClick() : history.push(AppRoute.FirstCatalogPage);
+  const handleGotoCartButtonClick = () => history.push(AppRoute.Cart);
 
   if(isGuitarAddInCart){
     return(
@@ -43,7 +44,7 @@ function AddInCartPopup ({guitar, onCloseButtonClick, isCatalogScreen} : AddInCa
             </svg>
             <p className="modal__message">Товар успешно добавлен в корзину</p>
             <div className="modal__button-container modal__button-container--add">
-              <button className="button button--small modal__button"><Link to={AppRoute.Cart}>Перейти в корзину</Link></button>
+              <button className="button button--small modal__button" onClick={handleGotoCartButtonClick}>Перейти в корзину</button>
               <button className="button button--black-border button--small modal__button modal__button--right" onClick={handleContinueShoppingButtonClick}>Продолжить покупки</button>
             </div>
             <button className="modal__close-btn button-cross" type="button" aria-label="Закрыть" onClick={onCloseButtonClick}><span className="button-cross__icon"></span><span className="modal__close-btn-interactive-area"></span>

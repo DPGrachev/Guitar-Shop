@@ -1,4 +1,4 @@
-import { MouseEvent, useRef } from 'react';
+import { ChangeEvent, MouseEvent, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PromoCodeStatus } from '../../const';
 import { postCoupon } from '../../store/api-actions';
@@ -16,6 +16,16 @@ function PromoCodeField (): JSX.Element {
     }
   };
 
+  const handleCodeInputFieldChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    evt.currentTarget.value = evt.currentTarget.value.split(' ').filter((item) => !!item).join('');
+  };
+
+  useEffect(() => {
+    if(codeInputField.current?.value && status === PromoCodeStatus.Failed){
+      codeInputField.current.value = '';
+    }
+  },[status]);
+
   return(
     <div className="cart__coupon coupon">
       <h2 className="title title--little coupon__title">Промокод на скидку</h2>
@@ -23,7 +33,7 @@ function PromoCodeField (): JSX.Element {
       <form className="coupon__form" id="coupon-form" method="post" action="/">
         <div className="form-input coupon__input">
           <label className="visually-hidden">Промокод</label>
-          <input ref={codeInputField} type="text" placeholder="Введите промокод" id="coupon" name="coupon" data-testid='codeInputField'/>
+          <input ref={codeInputField} type="text" placeholder="Введите промокод" id="coupon" name="coupon" data-testid='codeInputField' onChange={handleCodeInputFieldChange}/>
           {status === PromoCodeStatus.Succes && <p className="form-input__message form-input__message--success">Промокод принят</p>}
           {status === PromoCodeStatus.Failed &&<p className="form-input__message form-input__message--error">неверный промокод</p>}
         </div>
