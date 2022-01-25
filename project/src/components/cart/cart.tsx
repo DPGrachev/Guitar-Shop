@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { getDiscount, getGuitarsinCurt, getNumberOfGuitarsInCurt } from '../../store/cart/selectors';
+import { getDiscount, getGuitarsInCurt, getNumberOfGuitarsInCurt } from '../../store/cart/selectors';
 import { Guitar } from '../../types/guitar';
 import Footer from '../footer/footer';
-import GuirarCardInCart from '../guitar-card-in-cart/guitar-card-in-cart';
+import GuitarCardInCart from '../guitar-card-in-cart/guitar-card-in-cart';
 import Header from '../header/header';
 import {RemoveScroll} from 'react-remove-scroll';
 import FocusLock from 'react-focus-lock';
@@ -14,7 +14,7 @@ import { formatPrice } from '../../utils/utils';
 import PromoCodeField from '../promo-code-field/promo-code-field';
 
 function Cart (): JSX.Element {
-  const guitarsInCart = useSelector(getGuitarsinCurt);
+  const guitarsInCart = useSelector(getGuitarsInCurt);
   const numberOfGuitarsInCurt = useSelector(getNumberOfGuitarsInCurt);
   const discount = useSelector(getDiscount);
   const [removableGuitar, setRemovableGuitar] = useState<Guitar | null>(null);
@@ -68,7 +68,7 @@ function Cart (): JSX.Element {
           </ul>
           <div className="cart">
             {guitarsInCart.length === 0 && <h1>Корзина пуста</h1>}
-            {guitarsInCart.map((guitar) => <GuirarCardInCart key={guitar.id} guitar={guitar} onDeleteFromCartButtonClick={openDeleteFromCartForm}/>)}
+            {guitarsInCart.map((guitar) => <GuitarCardInCart key={guitar.id} guitar={guitar} onDeleteFromCartButtonClick={openDeleteFromCartForm}/>)}
             <div className="cart__footer">
               <PromoCodeField />
               <div className="cart__total-info">

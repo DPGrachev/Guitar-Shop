@@ -37,7 +37,7 @@ function PromoCodeField (): JSX.Element {
           {status === PromoCodeStatus.Success && <p className="form-input__message form-input__message--success">Промокод принят</p>}
           {status === PromoCodeStatus.Failed &&<p className="form-input__message form-input__message--error">неверный промокод</p>}
         </div>
-        <button className="button button--big coupon__button" onClick={handleConfirmButtonClick} data-testid='confrimButton'>Применить</button>
+        <button className="button button--big coupon__button" onClick={handleConfirmButtonClick}>Применить</button>
       </form>
     </div>
   );

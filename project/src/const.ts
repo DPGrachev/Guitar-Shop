@@ -17,7 +17,7 @@ const enum ActionType {
   SetGuitarTypeFilter = 'catalog-screen/set-guitar-type-filter',
   SetStringsCountFilter = 'catalog-screen/set-strings-count-filter',
   SetPriceRangeFilter = 'catalog-screen/set-price-range-filter',
-  SetFiltesOptions = 'catalog-screen/set-filters-options',
+  SetFiltersOptions = 'catalog-screen/set-filters-options',
   SetCurrentPageOptions = 'catalog-screen/set-current-page-options',
   SetGuitarInCart = 'cart/set-guitar-in-cart',
   SetNumberOfGuitarInCurt = 'cart/set-number-of-guitar-in-curt',
@@ -57,7 +57,7 @@ const stringsInGuitarType = {
 };
 
 enum PromoCodeStatus {
-  Success = 'succes',
+  Success = 'success',
   Failed = 'failed',
   Default = 'default'
 }

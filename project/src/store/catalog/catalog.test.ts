@@ -29,7 +29,7 @@ describe('Reducer: catalog', () => {
 
   it('should update currentPageOptions by current page', () => {
 
-    const fakeCurrentPageOptions = 'newpage';
+    const fakeCurrentPageOptions = 'newPage';
     expect(catalog(state, setCurrentPageOptions(fakeCurrentPageOptions)))
       .toEqual({
         sortedOptions: '',

@@ -71,7 +71,7 @@ describe('Component: NewCommentPopup', () => {
 
     userEvent.click(screen.getByText(/Отправить отзыв/i));
 
-    expect(screen.queryByText(/Cпасибо за ваш отзыв!/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Спасибо за ваш отзыв!/i)).not.toBeInTheDocument();
     expect(screen.getByText(/Отправить отзыв/i)).toBeInTheDocument();
   });
 

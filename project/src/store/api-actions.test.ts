@@ -131,18 +131,18 @@ describe('Async actions', () => {
 
   it('should dispatch setDiscount and setPromoCodeStatus when POST /coupons', async () => {
     const store = mockStore();
-    const fakeCoupon = {coupon: 'asdaf'};
-    const fakeDiscont = 20;
+    const fakeCoupon = {coupon: 'getMe'};
+    const fakeDiscount = 20;
     mockAPI
       .onPost('/coupons')
-      .reply(200, fakeDiscont);
+      .reply(200, fakeDiscount);
 
     expect(store.getActions()).toEqual([]);
 
     await store.dispatch(postCoupon(fakeCoupon));
 
     expect(store.getActions()).toEqual([
-      setDiscount(fakeDiscont),
+      setDiscount(fakeDiscount),
       setPromoCodeStatus(PromoCodeStatus.Success),
     ]);
   });

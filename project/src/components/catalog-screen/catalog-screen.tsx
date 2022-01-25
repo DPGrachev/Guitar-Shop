@@ -19,7 +19,7 @@ import { Guitar } from '../../types/guitar';
 function CatalogScreen ():JSX.Element {
   const dispatch = useDispatch();
   const params = useSelector(getFiltersOptions);
-  const currentPargeOptions = useSelector(getCurrentPageOptions);
+  const currentPageOptions = useSelector(getCurrentPageOptions);
   const currentSortedOption = useSelector(getSortedOptions);
   const guitars = useSelector(getGuitarCards);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -35,10 +35,10 @@ function CatalogScreen ():JSX.Element {
   },[isDataLoaded, guitars]);
 
   useEffect(() => {
-    if(currentPargeOptions){
-      dispatch(fetchGuitarCardsAction(params,currentSortedOption, currentPargeOptions));
+    if(currentPageOptions){
+      dispatch(fetchGuitarCardsAction(params,currentSortedOption, currentPageOptions));
     }
-  }, [dispatch, params, currentSortedOption, currentPargeOptions]);
+  }, [dispatch, params, currentSortedOption, currentPageOptions]);
 
   useEffect(() => {
     if((params && location.search !== `?${params}`) || (location.search && !params)){

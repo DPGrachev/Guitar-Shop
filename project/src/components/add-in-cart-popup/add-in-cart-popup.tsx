@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AppRoute, GuitarTypeTranslate } from '../../const';
 import { setGuitarInCart, setNumberOfGuitarInCurt } from '../../store/actions';
-import { getGuitarsinCurt, getNumberOfGuitarsInCurt } from '../../store/cart/selectors';
+import { getGuitarsInCurt, getNumberOfGuitarsInCurt } from '../../store/cart/selectors';
 import { Guitar } from '../../types/guitar';
 import { formatPrice } from '../../utils/utils';
 
@@ -14,7 +14,7 @@ type AddInCartPopupProps = {
 }
 
 function AddInCartPopup ({guitar, onCloseButtonClick, isCatalogScreen} : AddInCartPopupProps): JSX.Element {
-  const guitarsInCart = useSelector(getGuitarsinCurt);
+  const guitarsInCart = useSelector(getGuitarsInCurt);
   const numberOfGuitarsInCurt = useSelector(getNumberOfGuitarsInCurt);
   const [isGuitarAddInCart, setIsGuitarAddInCart] = useState(false);
   const history = useHistory();

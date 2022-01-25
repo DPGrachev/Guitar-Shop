@@ -105,7 +105,7 @@ const setGuitarInCart = createAction(
   ActionType.SetGuitarInCart,
   (guitar: Guitar) => ({
     payload: {
-      gutarInCart: guitar,
+      guitarInCart: guitar,
     },
   }),
 );
@@ -124,7 +124,7 @@ const removeGuitarInCart = createAction(
   ActionType.RemoveGuitarInCart,
   (guitar: Guitar) => ({
     payload: {
-      gutarInCart: guitar,
+      guitarInCart: guitar,
     },
   }),
 );

@@ -1,7 +1,7 @@
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import {render, screen} from '@testing-library/react';
-import GuirarCardInCart from './guitar-card-in-cart';
+import GuitarCardInCart from './guitar-card-in-cart';
 import { mockGuitarCard } from '../../utils/mocks';
 import { createAPI } from '../../services/api';
 import thunk, {ThunkDispatch} from 'redux-thunk';
@@ -10,7 +10,7 @@ import {Action} from 'redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
 import userEvent from '@testing-library/user-event';
-describe('Component: GuirarCardInCart', () => {
+describe('Component: GuitarCardInCart', () => {
   const api = createAPI();
   const middlewares = [thunk.withExtraArgument(api)];
   const mockStore = configureMockStore<
@@ -33,7 +33,7 @@ describe('Component: GuirarCardInCart', () => {
     render(
       <Provider store={store}>
         <Router history={history}>
-          <GuirarCardInCart guitar={mockGuitarCard} onDeleteFromCartButtonClick={fakeOnDeleteFromCartButtonClick}/>
+          <GuitarCardInCart guitar={mockGuitarCard} onDeleteFromCartButtonClick={fakeOnDeleteFromCartButtonClick}/>
         </Router>
       </Provider>,
     );
@@ -48,7 +48,7 @@ describe('Component: GuirarCardInCart', () => {
     render(
       <Provider store={store}>
         <Router history={history}>
-          <GuirarCardInCart guitar={mockGuitarCard} onDeleteFromCartButtonClick={fakeOnDeleteFromCartButtonClick}/>
+          <GuitarCardInCart guitar={mockGuitarCard} onDeleteFromCartButtonClick={fakeOnDeleteFromCartButtonClick}/>
         </Router>
       </Provider>,
     );
@@ -62,7 +62,7 @@ describe('Component: GuirarCardInCart', () => {
     render(
       <Provider store={store}>
         <Router history={history}>
-          <GuirarCardInCart guitar={mockGuitarCard} onDeleteFromCartButtonClick={fakeOnDeleteFromCartButtonClick}/>
+          <GuitarCardInCart guitar={mockGuitarCard} onDeleteFromCartButtonClick={fakeOnDeleteFromCartButtonClick}/>
         </Router>
       </Provider>,
     );
@@ -76,7 +76,7 @@ describe('Component: GuirarCardInCart', () => {
     render(
       <Provider store={store}>
         <Router history={history}>
-          <GuirarCardInCart guitar={mockGuitarCard} onDeleteFromCartButtonClick={fakeOnDeleteFromCartButtonClick}/>
+          <GuitarCardInCart guitar={mockGuitarCard} onDeleteFromCartButtonClick={fakeOnDeleteFromCartButtonClick}/>
         </Router>
       </Provider>,
     );
@@ -91,7 +91,7 @@ describe('Component: GuirarCardInCart', () => {
     render(
       <Provider store={store}>
         <Router history={history}>
-          <GuirarCardInCart guitar={mockGuitarCard} onDeleteFromCartButtonClick={fakeOnDeleteFromCartButtonClick}/>
+          <GuitarCardInCart guitar={mockGuitarCard} onDeleteFromCartButtonClick={fakeOnDeleteFromCartButtonClick}/>
         </Router>
       </Provider>,
     );
@@ -105,7 +105,7 @@ describe('Component: GuirarCardInCart', () => {
     render(
       <Provider store={store}>
         <Router history={history}>
-          <GuirarCardInCart guitar={mockGuitarCard} onDeleteFromCartButtonClick={fakeOnDeleteFromCartButtonClick}/>
+          <GuitarCardInCart guitar={mockGuitarCard} onDeleteFromCartButtonClick={fakeOnDeleteFromCartButtonClick}/>
         </Router>
       </Provider>,
     );

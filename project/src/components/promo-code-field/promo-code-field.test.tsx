@@ -60,7 +60,7 @@ describe('Component: PromoCodeField', () => {
     expect(screen.getByText(/неверный промокод/i)).toBeInTheDocument();
   });
 
-  it('when promo code status Succes, should render succes message', () => {
+  it('when promo code status Success, should render success message', () => {
     const history = createMemoryHistory();
     const store= mockStore({
       CART: {

@@ -6,12 +6,12 @@ import { getNumberOfGuitarsInCurt } from '../../store/cart/selectors';
 import { Guitar } from '../../types/guitar';
 import { formatPrice } from '../../utils/utils';
 
-type GuirarCardInCartProps = {
+type GuitarCardInCartProps = {
   guitar: Guitar,
   onDeleteFromCartButtonClick: ( guitar :Guitar) => void;
 }
 
-function GuirarCardInCart ({guitar, onDeleteFromCartButtonClick}: GuirarCardInCartProps): JSX.Element {
+function GuitarCardInCart ({guitar, onDeleteFromCartButtonClick}: GuitarCardInCartProps): JSX.Element {
   const quantityField = useRef<HTMLInputElement>(null);
   const numberInCart = useSelector(getNumberOfGuitarsInCurt)[guitar.id];
   const dispatch = useDispatch();
@@ -83,4 +83,4 @@ function GuirarCardInCart ({guitar, onDeleteFromCartButtonClick}: GuirarCardInCa
   );
 }
 
-export default GuirarCardInCart;
+export default GuitarCardInCart;

@@ -2,7 +2,7 @@ import { MouseEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { getGuitarsinCurt } from '../../store/cart/selectors';
+import { getGuitarsInCurt } from '../../store/cart/selectors';
 import { Guitar } from '../../types/guitar';
 import RatingStars from '../rating-stars/rating-stars';
 
@@ -12,7 +12,7 @@ type GuitarCardProps = {
 }
 
 function GuitarCard ({guitar, onAddInCartButtonClick} : GuitarCardProps) :JSX.Element {
-  const guitarsInCart = useSelector(getGuitarsinCurt);
+  const guitarsInCart = useSelector(getGuitarsInCurt);
 
   const handleAddInCartButtonClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();

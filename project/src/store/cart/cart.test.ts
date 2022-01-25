@@ -49,11 +49,11 @@ describe('Reducer: cart', () => {
   });
 
   it('should update discount by load discount', () => {
-    const fakeDiscont = 20;
-    expect(cart(state, setDiscount(fakeDiscont)))
+    const fakeDiscount = 20;
+    expect(cart(state, setDiscount(fakeDiscount)))
       .toEqual({
         ...state,
-        discount: fakeDiscont,
+        discount: fakeDiscount,
       });
   });
 
