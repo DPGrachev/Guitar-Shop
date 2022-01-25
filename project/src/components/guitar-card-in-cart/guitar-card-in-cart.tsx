@@ -34,6 +34,13 @@ function GuitarCardInCart ({guitar, onDeleteFromCartButtonClick}: GuitarCardInCa
     dispatch(setNumberOfGuitarInCurt(guitar.id,quantity));
   };
 
+  const handleQuantityFiledBlur = (evt: ChangeEvent<HTMLInputElement>) => {
+    if(!evt.currentTarget.value){
+      evt.currentTarget.value = '1';
+      dispatch(setNumberOfGuitarInCurt(guitar.id,1));
+    }
+  };
+
   const handleIncrementButtonClick = () => {
     if(quantityField.current?.value){
       const newValue = Number(quantityField.current.value) + 1;
@@ -75,7 +82,7 @@ function GuitarCardInCart ({guitar, onDeleteFromCartButtonClick}: GuitarCardInCa
             <use xlinkHref="#icon-minus"></use>
           </svg>
         </button>
-        <input ref={quantityField} data-testid='quantityField' className="quantity__input" type="number" id="2-count" name="2-count" max="99" defaultValue={numberInCart} onChange={handleQuantityChange}/>
+        <input ref={quantityField} data-testid='quantityField' className="quantity__input" type="number" id="2-count" name="2-count" max="99" defaultValue={numberInCart} onChange={handleQuantityChange} onBlur={handleQuantityFiledBlur}/>
         <button className="quantity__button" aria-label="Увеличить количество" data-testid='incBtn' onClick={handleIncrementButtonClick}>
           <svg width="8" height="8" aria-hidden="true">
             <use xlinkHref="#icon-plus"></use>
