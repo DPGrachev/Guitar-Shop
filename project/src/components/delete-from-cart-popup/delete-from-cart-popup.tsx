@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import { GuitarTypeTranslate } from '../../const';
 import { removeGuitarInCart } from '../../store/actions';
 import { Guitar } from '../../types/guitar';
-import { formatePrice } from '../../utils/utils';
+import { formatPrice } from '../../utils/utils';
 
 type DeleteFromCartPopupProps = {
   guitar: Guitar,
@@ -28,7 +28,7 @@ function DeleteFromCartPopup ({guitar, onCloseButtonClick} : DeleteFromCartPopup
               <h3 className="modal__product-name title title--little title--uppercase">Гитара {guitar.name}</h3>
               <p className="modal__product-params modal__product-params--margin-11">Артикул: {guitar.vendorCode}</p>
               <p className="modal__product-params">{GuitarTypeTranslate[guitar.type]}, {guitar.stringCount} струнная</p>
-              <p className="modal__price-wrapper"><span className="modal__price">Цена:</span><span className="modal__price">{formatePrice(guitar.price)}</span></p>
+              <p className="modal__price-wrapper"><span className="modal__price">Цена:</span><span className="modal__price">{formatPrice(guitar.price)}</span></p>
             </div>
           </div>
           <div className="modal__button-container">

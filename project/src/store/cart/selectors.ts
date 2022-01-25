@@ -6,7 +6,7 @@ const getGuitarsinCurt = (state: State) => state[NameSpace.Cart].guitarsInCart;
 
 const getNumberOfGuitarsInCurt = (state: State) => state[NameSpace.Cart].numberOfGuitarsInCurt;
 
-const getDiscont = (state: State) => state[NameSpace.Cart].discont;
+const getDiscount = (state: State) => state[NameSpace.Cart].discount;
 
 const getPromoCodeStatus = (state: State) => state[NameSpace.Cart].promoCodeStatus;
 
@@ -15,4 +15,4 @@ const getSumGuitarsInCurt = createSelector(
   (numberOfGuitarsInCurt) => Object.values(numberOfGuitarsInCurt).reduce((acc,val) => acc + val, 0),
 );
 
-export {getGuitarsinCurt, getNumberOfGuitarsInCurt, getDiscont, getPromoCodeStatus, getSumGuitarsInCurt};
+export {getGuitarsinCurt, getNumberOfGuitarsInCurt, getDiscount, getPromoCodeStatus, getSumGuitarsInCurt};

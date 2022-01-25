@@ -9,7 +9,7 @@ function PromoCodeField (): JSX.Element {
   const status = useSelector(getPromoCodeStatus);
   const dispatch = useDispatch();
 
-  const handleConfrimButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
+  const handleConfirmButtonClick = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
     if(codeInputField.current?.value){
       dispatch(postCoupon({coupon: codeInputField.current.value}));
@@ -37,7 +37,7 @@ function PromoCodeField (): JSX.Element {
           {status === PromoCodeStatus.Succes && <p className="form-input__message form-input__message--success">Промокод принят</p>}
           {status === PromoCodeStatus.Failed &&<p className="form-input__message form-input__message--error">неверный промокод</p>}
         </div>
-        <button className="button button--big coupon__button" onClick={handleConfrimButtonClick} data-testid='confrimButton'>Применить</button>
+        <button className="button button--big coupon__button" onClick={handleConfirmButtonClick} data-testid='confrimButton'>Применить</button>
       </form>
     </div>
   );

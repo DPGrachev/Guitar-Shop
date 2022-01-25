@@ -4,7 +4,7 @@ import { GuitarTypeTranslate } from '../../const';
 import { setNumberOfGuitarInCurt } from '../../store/actions';
 import { getNumberOfGuitarsInCurt } from '../../store/cart/selectors';
 import { Guitar } from '../../types/guitar';
-import { formatePrice } from '../../utils/utils';
+import { formatPrice } from '../../utils/utils';
 
 type GuirarCardInCartProps = {
   guitar: Guitar,
@@ -64,7 +64,7 @@ function GuirarCardInCart ({guitar, onDeleteFromCartButtonClick}: GuirarCardInCa
         <p className="product-info__info">Артикул: {guitar.vendorCode}</p>
         <p className="product-info__info">{GuitarTypeTranslate[guitar.type]}, {guitar.stringCount} струнная</p>
       </div>
-      <div className="cart-item__price">{formatePrice(guitar.price)}</div>
+      <div className="cart-item__price">{formatPrice(guitar.price)}</div>
       <div className="quantity cart-item__quantity">
         <button className="quantity__button" aria-label="Уменьшить количество" data-testid='decBtn' onClick={handleDecrementButtonClick}>
           <svg width="8" height="8" aria-hidden="true">
@@ -78,7 +78,7 @@ function GuirarCardInCart ({guitar, onDeleteFromCartButtonClick}: GuirarCardInCa
           </svg>
         </button>
       </div>
-      <div className="cart-item__price-total">{formatePrice(guitar.price * numberInCart)}</div>
+      <div className="cart-item__price-total">{formatPrice(guitar.price * numberInCart)}</div>
     </div>
   );
 }

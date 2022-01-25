@@ -5,7 +5,7 @@ import { AppRoute, GuitarTypeTranslate } from '../../const';
 import { setGuitarInCart, setNumberOfGuitarInCurt } from '../../store/actions';
 import { getGuitarsinCurt, getNumberOfGuitarsInCurt } from '../../store/cart/selectors';
 import { Guitar } from '../../types/guitar';
-import { formatePrice } from '../../utils/utils';
+import { formatPrice } from '../../utils/utils';
 
 type AddInCartPopupProps = {
   guitar: Guitar,
@@ -65,7 +65,7 @@ function AddInCartPopup ({guitar, onCloseButtonClick, isCatalogScreen} : AddInCa
               <h3 className="modal__product-name title title--little title--uppercase">Гитара {guitar.name}</h3>
               <p className="modal__product-params modal__product-params--margin-11">Артикул: {guitar.vendorCode}</p>
               <p className="modal__product-params">{GuitarTypeTranslate[guitar.type]}, {guitar.stringCount} струнная</p>
-              <p className="modal__price-wrapper"><span className="modal__price">Цена:</span><span className="modal__price">{formatePrice(guitar.price)}</span></p>
+              <p className="modal__price-wrapper"><span className="modal__price">Цена:</span><span className="modal__price">{formatPrice(guitar.price)}</span></p>
             </div>
           </div>
           <div className="modal__button-container">

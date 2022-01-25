@@ -129,11 +129,11 @@ const removeGuitarInCart = createAction(
   }),
 );
 
-const setDiscont = createAction(
-  ActionType.SetDiscont,
-  (discont: number) => ({
+const setDiscount = createAction(
+  ActionType.SetDiscount,
+  (discount: number) => ({
     payload: {
-      discont: discont,
+      discount: discount,
     },
   }),
 );
@@ -162,6 +162,6 @@ export {
   setGuitarInCart,
   setNumberOfGuitarInCurt,
   removeGuitarInCart,
-  setDiscont,
+  setDiscount,
   setPromoCodeStatus
 };

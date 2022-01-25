@@ -26,7 +26,7 @@ type Cart = {
   numberOfGuitarsInCurt: {
     [key: number]: number,
   },
-  discont: number,
+  discount: number,
   promoCodeStatus: PromoCodeStatus,
 }
 

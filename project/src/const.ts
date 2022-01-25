@@ -4,7 +4,6 @@ const enum AppRoute {
   Cart = '/cart',
   FirstCatalogPage = '/catalog/page_1',
   GuitarScreen = '/guitars/:id',
-  NotFoundScreen = '404',
 }
 
 const enum ActionType {
@@ -23,7 +22,7 @@ const enum ActionType {
   SetGuitarInCart = 'cart/set-guitar-in-cart',
   SetNumberOfGuitarInCurt = 'cart/set-number-of-guitar-in-curt',
   RemoveGuitarInCart = 'cart/remove-guitar-in-cart',
-  SetDiscont = 'cart/set-discont',
+  SetDiscount = 'cart/set-discount',
   SetPromoCodeStatus = 'cart/set-promo-code-status',
 }
 

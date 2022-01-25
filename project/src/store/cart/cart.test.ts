@@ -1,13 +1,13 @@
 import { PromoCodeStatus } from '../../const';
 import { mockGuitarCard } from '../../utils/mocks';
-import { removeGuitarInCart, setDiscont, setGuitarInCart, setNumberOfGuitarInCurt, setPromoCodeStatus } from '../actions';
+import { removeGuitarInCart, setDiscount, setGuitarInCart, setNumberOfGuitarInCurt, setPromoCodeStatus } from '../actions';
 import { cart } from './cart';
 
 describe('Reducer: cart', () => {
   const state = {
     guitarsInCart: [],
     numberOfGuitarsInCurt: {},
-    discont: 0,
+    discount: 0,
     promoCodeStatus: PromoCodeStatus.Default,
   };
   it('without additional parameters should return initial state', () => {
@@ -37,7 +37,7 @@ describe('Reducer: cart', () => {
     const newState = {
       guitarsInCart: [mockGuitarCard],
       numberOfGuitarsInCurt: {[mockGuitarCard.id] : 1},
-      discont: 0,
+      discount: 0,
       promoCodeStatus: PromoCodeStatus.Default,
     };
     expect(cart(newState, removeGuitarInCart(mockGuitarCard)))
@@ -50,7 +50,7 @@ describe('Reducer: cart', () => {
 
   it('should update discont by load discont', () => {
     const fakeDiscont = 20;
-    expect(cart(state, setDiscont(fakeDiscont)))
+    expect(cart(state, setDiscount(fakeDiscont)))
       .toEqual({
         ...state,
         discont: fakeDiscont,
