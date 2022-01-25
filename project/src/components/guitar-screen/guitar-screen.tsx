@@ -15,7 +15,7 @@ import NewCommentPopup from '../new_comment_popup/new_comment_popup';
 import { Guitar } from '../../types/guitar';
 import FocusLock from 'react-focus-lock';
 import {RemoveScroll} from 'react-remove-scroll';
-import { formatePrice } from '../../utils/utils';
+import { formatPrice } from '../../utils/utils';
 import AddInCartPopup from '../add-in-cart-popup/add-in-cart-popup';
 
 type Params = {
@@ -160,7 +160,7 @@ function GuitarScreen ():JSX.Element {
                 </div>
                 <div className="product-container__price-wrapper">
                   <p className="product-container__price-info product-container__price-info--title">Цена:</p>
-                  <p className="product-container__price-info product-container__price-info--value">{formatePrice(currentGuitarCard.price)}</p><a className="button button--red button--big product-container__button" href="/" onClick={handleAddInCartButtonClick}>Добавить в корзину</a>
+                  <p className="product-container__price-info product-container__price-info--value">{formatPrice(currentGuitarCard.price)}</p><a className="button button--red button--big product-container__button" href="/" onClick={handleAddInCartButtonClick}>Добавить в корзину</a>
                 </div>
               </div>
               <section className="reviews">

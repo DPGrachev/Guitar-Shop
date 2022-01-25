@@ -57,7 +57,7 @@ const stringsInGuitarType = {
 };
 
 enum PromoCodeStatus {
-  Succes = 'succes',
+  Success = 'succes',
   Failed = 'failed',
   Default = 'default'
 }

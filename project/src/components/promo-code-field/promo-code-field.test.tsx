@@ -64,7 +64,7 @@ describe('Component: PromoCodeField', () => {
     const history = createMemoryHistory();
     const store= mockStore({
       CART: {
-        promoCodeStatus: PromoCodeStatus.Succes,
+        promoCodeStatus: PromoCodeStatus.Success,
       },
     });
 

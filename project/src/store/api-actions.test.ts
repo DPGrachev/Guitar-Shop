@@ -6,7 +6,7 @@ import {createAPI} from '../services/api';
 import {fetchCurrentGuitarCardAction, fetchGuitarCardsAction, fetchMaxPriceAction, fetchMinPriceAction, fetchSimilarGuitarCardsAction, postCoupon, postNewComment} from './api-actions';
 import {State} from '../types/state';
 import {mockGuitarCard, mockGuitars} from '../utils/mocks';
-import { setCardsTotalCount, setCurrentGuitarCard, setDiscont, setGuitarCards, setMaxPrice, setMinPrice, setPromoCodeStatus, setSimilarGuitarCards } from './actions';
+import { setCardsTotalCount, setCurrentGuitarCard, setDiscount, setGuitarCards, setMaxPrice, setMinPrice, setPromoCodeStatus, setSimilarGuitarCards } from './actions';
 import { PromoCodeStatus } from '../const';
 
 describe('Async actions', () => {
@@ -129,7 +129,7 @@ describe('Async actions', () => {
     ]);
   });
 
-  it('should dispatch setDiscont and setPromoCodeStatus when POST /coupons', async () => {
+  it('should dispatch setDiscount and setPromoCodeStatus when POST /coupons', async () => {
     const store = mockStore();
     const fakeCoupon = {coupon: 'asdaf'};
     const fakeDiscont = 20;
@@ -142,8 +142,8 @@ describe('Async actions', () => {
     await store.dispatch(postCoupon(fakeCoupon));
 
     expect(store.getActions()).toEqual([
-      setDiscont(fakeDiscont),
-      setPromoCodeStatus(PromoCodeStatus.Succes),
+      setDiscount(fakeDiscont),
+      setPromoCodeStatus(PromoCodeStatus.Success),
     ]);
   });
 });

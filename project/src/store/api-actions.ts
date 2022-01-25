@@ -1,6 +1,6 @@
 import { ThunkActionResult } from '../types/actions';
 import { Guitar } from '../types/guitar';
-import { setCardsTotalCount, setCurrentGuitarCard, setDiscont, setGuitarCards, setMaxPrice, setMinPrice, setPromoCodeStatus, setSimilarGuitarCards } from './actions';
+import { setCardsTotalCount, setCurrentGuitarCard, setDiscount, setGuitarCards, setMaxPrice, setMinPrice, setPromoCodeStatus, setSimilarGuitarCards } from './actions';
 import { toast } from 'react-toastify';
 import { CommentPost } from '../types/comment';
 import { CouponPost } from '../types/coupon';
@@ -67,8 +67,8 @@ const postCoupon = (coupon: CouponPost) : ThunkActionResult =>
     try{
       await api.post('/coupons', coupon)
         .then((response) => {
-          dispatch(setDiscont(Number(response.data)));
-          dispatch(setPromoCodeStatus(PromoCodeStatus.Succes));
+          dispatch(setDiscount(Number(response.data)));
+          dispatch(setPromoCodeStatus(PromoCodeStatus.Success));
         });
     }catch{
       dispatch(setPromoCodeStatus(PromoCodeStatus.Failed));

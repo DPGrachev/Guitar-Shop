@@ -48,17 +48,17 @@ describe('Reducer: cart', () => {
       });
   });
 
-  it('should update discont by load discont', () => {
+  it('should update discount by load discount', () => {
     const fakeDiscont = 20;
     expect(cart(state, setDiscount(fakeDiscont)))
       .toEqual({
         ...state,
-        discont: fakeDiscont,
+        discount: fakeDiscont,
       });
   });
 
   it('should update promo code status', () => {
-    const fakeStatus = PromoCodeStatus.Succes;
+    const fakeStatus = PromoCodeStatus.Success;
     expect(cart(state, setPromoCodeStatus(fakeStatus)))
       .toEqual({
         ...state,
