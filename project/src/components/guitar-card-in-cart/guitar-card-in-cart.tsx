@@ -21,6 +21,9 @@ function GuitarCardInCart ({guitar, onDeleteFromCartButtonClick}: GuitarCardInCa
   };
 
   const handleQuantityChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    if(!evt.currentTarget.value){
+      return;
+    }
     if(Number(evt.currentTarget.value) > 99){
       evt.currentTarget.value = '99';
     }
@@ -34,6 +37,7 @@ function GuitarCardInCart ({guitar, onDeleteFromCartButtonClick}: GuitarCardInCa
   const handleIncrementButtonClick = () => {
     if(quantityField.current?.value){
       const newValue = Number(quantityField.current.value) + 1;
+      if(newValue > 99) {return;}
       quantityField.current.value = String(newValue);
       dispatch(setNumberOfGuitarInCurt(guitar.id,newValue));
     }
@@ -71,7 +75,7 @@ function GuitarCardInCart ({guitar, onDeleteFromCartButtonClick}: GuitarCardInCa
             <use xlinkHref="#icon-minus"></use>
           </svg>
         </button>
-        <input ref={quantityField} data-testid='quantityField' className="quantity__input" type="number" placeholder="1" id="2-count" name="2-count" max="99" defaultValue={numberInCart} onChange={handleQuantityChange}/>
+        <input ref={quantityField} data-testid='quantityField' className="quantity__input" type="number" id="2-count" name="2-count" max="99" defaultValue={numberInCart} onChange={handleQuantityChange}/>
         <button className="quantity__button" aria-label="Увеличить количество" data-testid='incBtn' onClick={handleIncrementButtonClick}>
           <svg width="8" height="8" aria-hidden="true">
             <use xlinkHref="#icon-plus"></use>
