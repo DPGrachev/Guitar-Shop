@@ -1,5 +1,5 @@
 # Guitar-Shop
-Guitar-Shop
+Guitar-Shop - is online store of professional guitars
 
 ## Quick Start with Hosting
 
